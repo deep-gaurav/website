@@ -44,7 +44,7 @@ pub fn App() -> impl IntoView {
         }
 
         // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="Deep Gaurav"/>
 
         // content for this welcome page
         <Router>
