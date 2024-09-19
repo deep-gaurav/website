@@ -1,7 +1,10 @@
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
-    components::{Route, Router, Routes}, static_routes::StaticRoute, SsrMode, StaticSegment
+    components::{FlatRoutes, Route, Router, Routes},
+    path,
+    static_routes::StaticRoute,
+    SsrMode, StaticSegment,
 };
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -12,7 +15,8 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <AutoReload options=options.clone() />
-                <HydrationScripts options/>
+                <HydrationScripts options islands=true/>
+                <link rel="stylesheet" id="leptos" href="/pkg/leptos_tailwind.css"/>
                 <MetaTags/>
             </head>
             <body>
@@ -30,19 +34,25 @@ pub fn App() -> impl IntoView {
     view! {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/website.css"/>
+        {
+            #[cfg(not(feature="csr"))]{
+                view! {
+                    <Stylesheet id="leptos" href="/pkg/website.css"/>
+                }
+            }
+        }
 
         // sets the document title
         <Title text="Welcome to Leptos"/>
 
         // content for this welcome page
         <Router>
-            <main>
+            <main class="w-full h-full bg-black text-white">
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage
-                        // ssr=SsrMode::Static(
-                        //     StaticRoute::new(),
-                        // )
+                        ssr=SsrMode::Static(
+                            StaticRoute::new(),
+                        )
                     />
                 </Routes>
             </main>
@@ -53,12 +63,7 @@ pub fn App() -> impl IntoView {
 /// Renders the home page of your application.
 #[component]
 fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
-
     view! {
-        <h1>"Welcome to Leptos!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
+        <h1 class="text-xl">"Welcome to Leptos!"</h1>
     }
 }
