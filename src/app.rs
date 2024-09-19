@@ -6,6 +6,8 @@ use leptos_router::{
     SsrMode, StaticSegment,
 };
 
+use crate::home::HomePage;
+
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
@@ -46,7 +48,7 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
-            <main class="w-full h-full bg-black text-white">
+            <main class="w-full h-full bg-black/90 text-white">
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage
                         ssr=SsrMode::Static(
@@ -56,13 +58,5 @@ pub fn App() -> impl IntoView {
                 </Routes>
             </main>
         </Router>
-    }
-}
-
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    view! {
-        <h1 class="text-xl">"Welcome to Leptos!"</h1>
     }
 }
