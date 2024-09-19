@@ -7,17 +7,20 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
-name="websitebin"
-path="src/main.rs"
+name = "websitebin"
+path = "src/main.rs"
 
 [dependencies]
 axum = { version = "0.7", optional = true }
 console_error_panic_hook = "0.1"
 leptos = { git = "https://github.com/deep-gaurav/leptos" }
 leptos_axum = { git = "https://github.com/deep-gaurav/leptos", optional = true }
-leptos_meta = { git = "https://github.com/deep-gaurav/leptos"}
+leptos_meta = { git = "https://github.com/deep-gaurav/leptos" }
 leptos_router = { git = "https://github.com/deep-gaurav/leptos" }
-tokio = { version = "1", features = ["rt-multi-thread"], optional = true }
+tokio = { version = "1", features = [
+    "rt-multi-thread",
+    "macros",
+], optional = true }
 tower = { version = "0.4", optional = true }
 tower-http = { version = "0.5", features = ["fs"], optional = true }
 wasm-bindgen = "=0.2.93"
@@ -29,10 +32,10 @@ http = "1"
 csr = ["leptos/csr"]
 hydrate = ["leptos/hydrate"]
 ssr = [
-    "dep:axum",
+    # "dep:axum",
     "dep:tokio",
-    "dep:tower",
-    "dep:tower-http",
+    # "dep:tower",
+    # "dep:tower-http",
     "dep:leptos_axum",
     "leptos/ssr",
     "leptos_meta/ssr",
