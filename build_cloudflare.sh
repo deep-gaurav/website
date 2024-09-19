@@ -1,4 +1,4 @@
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl https://sh.rustup.rs -sSf | sh -s - --default-toolchain stable -y
 source ~/.cargo/env
 
 rustup target add wasm32-unknown-unknown
