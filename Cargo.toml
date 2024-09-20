@@ -13,12 +13,12 @@ path = "src/main.rs"
 [dependencies]
 axum = { version = "0.7", optional = true }
 console_error_panic_hook = "0.1"
-leptos = { git = "https://github.com/deep-gaurav/leptos" }
-leptos_axum = { git = "https://github.com/deep-gaurav/leptos", features = [
+leptos = { git = "https://github.com/leptos-rs/leptos" }
+leptos_axum = { git = "https://github.com/leptos-rs/leptos", features = [
     "islands-router",
 ], optional = true }
-leptos_meta = { git = "https://github.com/deep-gaurav/leptos" }
-leptos_router = { git = "https://github.com/deep-gaurav/leptos" }
+leptos_meta = { git = "https://github.com/leptos-rs/leptos" }
+leptos_router = { git = "https://github.com/leptos-rs/leptos" }
 tokio = { version = "1", features = [
     "rt-multi-thread",
     "macros",
