@@ -1,6 +1,10 @@
-use leptos::prelude::*;
+use leptos::{either::Either, prelude::*};
 
-use crate::header::Header;
+use crate::{
+    header::Header,
+    project::{Project, PROJECTS},
+    utils::Pairs,
+};
 
 #[component]
 pub fn HomePage() -> impl IntoView {
@@ -36,5 +40,56 @@ pub fn HomePage() -> impl IntoView {
                 </div>
             </div>
         </div>
+        <div class="px-20">
+            <h2 class="text-5xl font-semibold text-left"> "Projects" <span class="text-accent"> "." </span> </h2>
+            <div class="h-6" />
+
+            <div class="flex flex-col gap-10">
+            {
+                let project_pairs = Pairs::new( &PROJECTS[..3.min(PROJECTS.len())]);
+
+                project_pairs.into_iter().enumerate().map(|(index, (project1, project2))|{
+                    let (mut style1, mut style2) = ("flex-basis:40%; flex-grow:4;", "flex-basis:60%; flex-grow:6;");
+                    if index %2== 0 {
+                        (style1, style2) = (style2, style1);
+                    }
+                    view! {
+                        <div class="flex gap-10">
+                            <div
+                                style=style1
+                            >
+                                <ProjectCard project=project1 />
+                            </div>
+                            {
+                                if let Some(project2) = project2 {
+                                    Either::Left(view! {
+                                        <div
+                                            style=style2
+                                        >
+                                            <ProjectCard project=project2 />
+                                        </div>
+                                    })
+                                }else{
+                                    Either::Right(())
+                                }
+                            }
+                        </div>
+                    }
+                }).collect_view()
+            }
+            </div>
+
+        </div>
+    }
+}
+
+#[component]
+fn ProjectCard<'a>(project: &'a Project) -> impl IntoView + use<'a> {
+    view! {
+        <img class="rounded-xl h-80 w-full object-cover" src=project.cover_image.as_ref() />
+        <div class="h-4" />
+        <h3 class="text-left text-3xl font-semibold"> {project.name.as_ref()} </h3>
+        <div class="h-2" />
+        <p class="text-left text-slate-300 text-lg"> {project.short_description.as_ref()} </p>
     }
 }

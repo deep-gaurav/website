@@ -48,7 +48,7 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
-            <main class="w-full h-full bg-black/90 text-white">
+            <main class="w-full h-full bg-black/90 text-white overflow-auto">
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage
                         ssr=SsrMode::Static(
