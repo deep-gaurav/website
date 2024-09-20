@@ -1,6 +1,7 @@
 use leptos::{either::Either, prelude::*};
 
 use crate::{
+    footer::Footer,
     header::Header,
     project::{Project, PROJECTS},
     utils::Pairs,
@@ -29,7 +30,6 @@ pub fn HomePage() -> impl IntoView {
                     <div class="flex gap-4">
                         <button class="p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium"> "Get In Touch" </button>
                         <button class="p-2 px-4 border transition-colors border-white hover:bg-white hover:text-black rounded-md font-medium box-border"> "Browse Projects" </button>
-
                     </div>
                 </div>
 
@@ -103,8 +103,9 @@ Throughout my career, I've remained committed to crafting solutions that bring p
             </p>
         </div>
 
-        <div class="h-4" />
+        <div class="h-20" />
 
+        <Footer />
     }
 }
 

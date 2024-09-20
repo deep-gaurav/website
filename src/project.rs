@@ -39,6 +39,10 @@ pub fn ProjectsPage() -> impl IntoView {
     view! {
         <div class="min-h-dvh w-full flex flex-col px-20">
             <Header />
+            <div class="h-20" />
+            <h1 class="text-7xl font-bold text-left"> "My "<span class="text-accent">"Digital"</span>" Creations" </h1>
+            <div class="h-8" />
+            <h2 class="text-left text-xl text-slate-300" > "From social apps to cloud solutions: a showcase of innovative projects solving real-world problems" </h2>
 
         </div>
     }

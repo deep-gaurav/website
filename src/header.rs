@@ -8,6 +8,7 @@ pub enum MenuPage {
     Home,
     Projects,
     About,
+    Contact,
 }
 
 impl MenuPage {
@@ -16,6 +17,7 @@ impl MenuPage {
             MenuPage::Home => "Home",
             MenuPage::Projects => "Projects",
             MenuPage::About => "About",
+            MenuPage::Contact => "Contact",
         }
     }
 
@@ -24,6 +26,7 @@ impl MenuPage {
             MenuPage::Home => "/",
             MenuPage::Projects => "/projects/",
             MenuPage::About => "/about/",
+            MenuPage::Contact => "/contact/",
         }
     }
 }
