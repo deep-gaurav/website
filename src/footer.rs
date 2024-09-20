@@ -37,8 +37,8 @@ pub fn Footer() -> impl IntoView {
                 <div class="flex flex-col gap-4" >
                     <div class="text-xl font-semibold"> "Interested in working together" <span class="text-accent"> "?" </span> </div>
                     <div class="flex gap-4">
-                        <button class="p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium"> "Get In Touch" </button>
-                        <button class="p-2 px-4 border transition-colors border-white hover:bg-white hover:text-black rounded-md font-medium box-border"> "Browse Projects" </button>
+                        <A href={MenuPage::Contact.path()} {..view! {< {..} class="p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}} > "Get In Touch" </A>
+                        <A href={MenuPage::Projects.path()} {..view! {< {..} class="p-2 px-4 border transition-colors border-white hover:bg-white hover:text-black rounded-md font-medium box-border" />}}> "Browse Projects" </A>
                     </div>
                 </div>
                 <div class="flex-grow" />
