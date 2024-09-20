@@ -43,7 +43,7 @@ pub fn Footer() -> impl IntoView {
                 </div>
                 <div class="flex-grow" />
                 <div class="flex flex-col text-slate-300">
-                    <div class="text-lg"> "©2023 All Rights Reserved." </div>
+                    <div class="text-lg"> "©2024 All Rights Reserved." </div>
                     <div class="text-base"> "Made with 💜 by Deep Gaurav" </div>
                 </div>
             </div>
