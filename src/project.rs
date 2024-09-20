@@ -39,6 +39,13 @@ pub const PROJECTS: &[Project] = &[
             r#"MusicPiped is a material-designed music player that streams audio from YouTube, allowing ad-free background playback and offline caching. It offers a unique blend of YouTube Music features and traditional music player functionality without relying on Google APIs."#,
         ),
     },
+    Project {
+        name: std::borrow::Cow::Borrowed("BingoTingo"),
+        cover_image: std::borrow::Cow::Borrowed("/assets/images/projects/bingotingo/cover.png"),
+        short_description: std::borrow::Cow::Borrowed(
+            r#"A real-time online gaming web app merging Bingo and Lines/Boxes for endless fun and social interaction."#,
+        ),
+    },
 ];
 
 #[component]
