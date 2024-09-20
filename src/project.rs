@@ -64,8 +64,8 @@ pub fn ProjectCard<'a>(project: &'a Project) -> impl IntoView + use<'a> {
 #[component]
 pub fn ProjectsPage() -> impl IntoView {
     view! {
+        <Header />
         <div class="min-h-dvh w-full flex flex-col px-20">
-            <Header />
             <div class="h-20" />
             <h1 class="text-7xl font-bold text-left"> "My "<span class="text-accent">"Digital"</span>" Creations" </h1>
             <div class="h-8" />
