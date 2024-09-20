@@ -2,11 +2,12 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
+    path,
     static_routes::StaticRoute,
     SsrMode, StaticSegment,
 };
 
-use crate::home::HomePage;
+use crate::{header::Header, home::HomePage, project::ProjectsPage};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -51,6 +52,11 @@ pub fn App() -> impl IntoView {
             <main class="w-full h-full bg-black/90 text-white overflow-auto">
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage
+                        ssr=SsrMode::Static(
+                            StaticRoute::new(),
+                        )
+                    />
+                    <Route path=path!("projects/") view=ProjectsPage
                         ssr=SsrMode::Static(
                             StaticRoute::new(),
                         )

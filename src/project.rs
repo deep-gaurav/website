@@ -1,5 +1,9 @@
 use std::borrow::Cow;
 
+use leptos::prelude::*;
+
+use crate::header::Header;
+
 pub struct Project {
     pub name: Cow<'static, str>,
     pub cover_image: Cow<'static, str>,
@@ -29,3 +33,13 @@ pub const PROJECTS: &[Project] = &[
         ),
     },
 ];
+
+#[component]
+pub fn ProjectsPage() -> impl IntoView {
+    view! {
+        <div class="min-h-dvh w-full flex flex-col px-20">
+            <Header />
+
+        </div>
+    }
+}
