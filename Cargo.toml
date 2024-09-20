@@ -14,7 +14,9 @@ path = "src/main.rs"
 axum = { version = "0.7", optional = true }
 console_error_panic_hook = "0.1"
 leptos = { git = "https://github.com/deep-gaurav/leptos" }
-leptos_axum = { git = "https://github.com/deep-gaurav/leptos", optional = true }
+leptos_axum = { git = "https://github.com/deep-gaurav/leptos", features = [
+    "islands-router",
+], optional = true }
 leptos_meta = { git = "https://github.com/deep-gaurav/leptos" }
 leptos_router = { git = "https://github.com/deep-gaurav/leptos" }
 tokio = { version = "1", features = [
@@ -30,7 +32,7 @@ http = "1"
 
 [features]
 csr = ["leptos/csr"]
-hydrate = ["leptos/hydrate"]
+hydrate = ["leptos/hydrate", "leptos/experimental-islands"]
 ssr = [
     # "dep:axum",
     "dep:tokio",
@@ -40,6 +42,7 @@ ssr = [
     "leptos/ssr",
     "leptos_meta/ssr",
     "leptos_router/ssr",
+    "leptos/experimental-islands",
     "dep:tracing",
 ]
 

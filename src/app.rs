@@ -17,8 +17,20 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <AutoReload options=options.clone() />
+                {
+                    #[cfg(not(feature="csr"))]{
+                        view! {
+                            <link id="leptos" rel="stylesheet" href="/pkg/website.css"/>
+                        }
+                    }
+                    #[cfg(feature="csr")] {
+                        view! {
+                            <link rel="stylesheet" id="leptos" href="/pkg/leptos_tailwind.css"/>
+                        }
+                    }
+                }
                 <HydrationScripts options islands=true/>
-                <link rel="stylesheet" id="leptos" href="/pkg/leptos_tailwind.css"/>
+
                 <MetaTags/>
             </head>
             <body>
@@ -36,13 +48,6 @@ pub fn App() -> impl IntoView {
     view! {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
-        {
-            #[cfg(not(feature="csr"))]{
-                view! {
-                    <Stylesheet id="leptos" href="/pkg/website.css"/>
-                }
-            }
-        }
 
         // sets the document title
         <Title text="Deep Gaurav"/>
