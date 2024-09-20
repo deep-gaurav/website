@@ -27,9 +27,9 @@ pub fn Footer() -> impl IntoView {
                 </nav>
                 <div class="flex-grow"/>
                 <div class="flex gap-4">
-                    <A href="mailto:deepgauravraj@gmail.com"> <Icon icon=crate::icons::Icons::Mail /> </A>
-                    <A href="https://github.com/deep-gaurav"> <Icon icon=crate::icons::Icons::Github /> </A>
-                    <A href="https://www.linkedin.com/in/deepgauravraj/"> <Icon icon=crate::icons::Icons::LinkedIn /> </A>
+                    <A href="mailto:deepgauravraj@gmail.com"> <Icon {..view! { <{..} class="hover:text-accent" />}}  icon=crate::icons::Icons::Mail /> </A>
+                    <A href="https://github.com/deep-gaurav"> <Icon {..view! { <{..} class="hover:text-accent" />}} icon=crate::icons::Icons::Github /> </A>
+                    <A href="https://www.linkedin.com/in/deepgauravraj/"> <Icon {..view! { <{..} class="hover:text-accent" />}}  icon=crate::icons::Icons::LinkedIn /> </A>
                 </div>
             </div>
             <div class="h-10" />

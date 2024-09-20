@@ -3,7 +3,7 @@ use leptos::{either::Either, prelude::*};
 use crate::{
     footer::Footer,
     header::Header,
-    project::{Project, PROJECTS},
+    project::{Project, ProjectCard, PROJECTS},
     utils::Pairs,
 };
 
@@ -106,16 +106,5 @@ Throughout my career, I've remained committed to crafting solutions that bring p
         <div class="h-20" />
 
         <Footer />
-    }
-}
-
-#[component]
-fn ProjectCard<'a>(project: &'a Project) -> impl IntoView + use<'a> {
-    view! {
-        <img class="rounded-xl h-80 w-full object-cover" src=project.cover_image.as_ref() />
-        <div class="h-4" />
-        <h3 class="text-left text-3xl font-semibold"> {project.name.as_ref()} </h3>
-        <div class="h-2" />
-        <p class="text-left text-slate-300 text-lg"> {project.short_description.as_ref()} </p>
     }
 }
