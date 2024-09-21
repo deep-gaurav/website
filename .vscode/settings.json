@@ -32,6 +32,6 @@
         "ssr",
         "hydrate"
     ],
-    "rust-analyzer.check.command": "clippy",
+    // "rust-analyzer.check.command": "clippy",
     "remote.localPortHost": "allInterfaces",
 }

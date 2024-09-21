@@ -29,6 +29,11 @@ wasm-bindgen = "=0.2.93"
 thiserror = "1"
 tracing = { version = "0.1", optional = true }
 http = "1"
+markdown = "=1.0.0-alpha.20"
+tokio-stream = { version = "0.1.16", optional = true, features = ["fs"] }
+yaml-rust2 = { version = "0.8" }
+anyhow = { version = "1" }
+serde = { version = "1", features = ["derive"] }
 
 [features]
 csr = ["leptos/csr"]
@@ -44,6 +49,7 @@ ssr = [
     "leptos_router/ssr",
     "leptos/experimental-islands",
     "dep:tracing",
+    "dep:tokio-stream",
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode

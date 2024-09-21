@@ -6,6 +6,7 @@ pub mod header;
 pub mod home;
 pub mod icons;
 pub mod project;
+pub mod projects;
 pub mod utils;
 
 #[cfg(feature = "hydrate")]
