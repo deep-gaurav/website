@@ -16,7 +16,7 @@ pub fn HomePage() -> impl IntoView {
             <Header />
 
             <div class="flex-grow w-full flex flex-col md:flex-row justify-stretch items-center">
-                <div class="flex-grow min-h-2" />
+                <div class="flex-grow md:flex-grow-0" />
                 <div class="flex flex-col">
                     <div class="text-slate-300 text-lg text-left">
                         "Hi, I'm Deep 👋"
@@ -37,12 +37,12 @@ pub fn HomePage() -> impl IntoView {
                 </div>
 
                 <div class="flex-grow min-h-2 flex-shrink-0" />
-                <div class="p-8 border border-solid border-accent rounded-full w-full md:w-[30%]">
+                <div class="p-8 md:p-10 border border-solid border-accent rounded-full w-full md:w-[30%]">
                     <div class="rounded-full relative overflow-hidden w-full aspect-square">
                         <img class="inline h-full w-full object-cover" src="/assets/images/deep.webp" />
                     </div>
                 </div>
-                <div class="flex-grow" />
+                <div class="flex-grow md:flex-grow-0" />
             </div>
         </div>
         <div class="px-8 md:px-20 flex flex-col">

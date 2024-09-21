@@ -9,19 +9,19 @@ use crate::{footer::Footer, header::Header, icons::Icon};
 pub fn AboutPage() -> impl IntoView {
     view! {
         <Header />
-        <div class="flex flex-col px-20">
+        <div class="flex flex-col px-8 md:px-20">
             <div class="h-20" />
-            <h1 class="text-7xl font-bold text-left"> "About me"<span class="text-accent">"."</span></h1>
+            <h1 class="text-5xl md:text-7xl font-bold text-left"> "About me"<span class="text-accent">"."</span></h1>
             <div class="h-8" />
             <h2 class="text-left text-xl text-slate-300" > "Tech enthusiast building connective solutions, one app at a time. Passionate about crafting innovative experiences that bring people closer together." </h2>
             <div class="h-10" />
-            <div class="flex gap-10 items-stretch">
-                <div class="flex flex-col flex-shrink-0 flex-grow-[1]  basis-0 relative w-1">
+            <div class="flex gap-10 items-stretch flex-col md:flex-row">
+                <div class="flex flex-col flex-shrink-0 flex-grow-[1]  basis-0 relative w-full md:w-1">
                     <h3 class="text-2xl font-semibold text-left"> "My Stack" </h3>
                     <div class="h-4" />
                     <TechStack />
                 </div>
-                <div class="flex flex-col flex-shrink-0 flex-grow-[2] basis-0 relative w-1">
+                <div class="flex flex-col flex-shrink-0 flex-grow-[2] basis-0 relative w-full md:w-1">
                     <h3 class="text-2xl font-semibold text-left"> "My Place" </h3>
                     <div class="h-4" />
                     <Location />
@@ -99,7 +99,7 @@ fn TechStack() -> impl IntoView {
 #[component]
 fn Location() -> impl IntoView {
     view! {
-        <div class="bg-white/10 overflow-hidden rounded-md flex justify-center items-center">
+        <div class="bg-white/10 overflow-hidden rounded-md flex justify-center items-center flex-col md:flex-row p-2">
             <div class="aspect-square w-full max-w-[400px]">
                 <canvas id="cobe" class="w-full h-full cursor-grab" />
                 <Script defer="true" type_="module" src="/assets/scripts/cobe.js" />
@@ -161,7 +161,7 @@ Since joining in August 2023, I've developed a web app version, significantly im
         },
     ];
     view! {
-        <div class="px-20 flex flex-col">
+        <div class="px-8 md:px-20 flex flex-col">
             <h2 class="text-5xl font-semibold text-left"> "My Experience" <span class="text-accent"> "." </span> </h2>
             <div class="h-10" />
 
@@ -169,11 +169,18 @@ Since joining in August 2023, I've developed a web app version, significantly im
                 EXPERIENCES.iter().enumerate().map(|(index,experience)|{
                     view! {
                         <div>
-                            <div class="flex">
-                                <div class="ml-4 text-5xl font-bold flex-shrink-0 w-32 text-left"> {format!("{:02}", index+1)}  </div>
+                            <div class="flex flex-col md:flex-row">
+                                <div class="flex gap-4">
+                                    <div class="md:ml-4 text-5xl font-bold flex-shrink-0 md:w-32 text-left"> {format!("{:02}", index+1)}  </div>
+                                    <div class="flex flex-col">
+                                        <div class="text-accent md:hidden text-left"> {experience.designation.as_ref()} </div>
+                                        <div class="font-bold text-2xl md:hidden text-left"> {experience.company.as_ref()} </div>
+                                    </div>
+                                </div>
+                                <div class="h-2" />
                                 <div class="text-left flex flex-col">
-                                    <div class="text-accent"> {experience.designation.as_ref()} </div>
-                                    <div class="font-bold text-2xl"> {experience.company.as_ref()} </div>
+                                    <div class="text-accent hidden md:block"> {experience.designation.as_ref()} </div>
+                                    <div class="font-bold text-2xl hidden md:block"> {experience.company.as_ref()} </div>
                                     <div class="text-slate-300 w-full whitespace-break-spaces"> {experience.content.as_ref()} </div>
                                 </div>
                             </div>
