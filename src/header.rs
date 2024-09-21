@@ -1,6 +1,3 @@
-use std::borrow::Cow;
-
-use leptos::logging::log;
 use leptos::prelude::*;
 use leptos_router::{components::A, hooks::use_location};
 

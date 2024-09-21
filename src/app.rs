@@ -7,7 +7,7 @@ use leptos_router::{
     SsrMode, StaticSegment,
 };
 
-use crate::{about::AboutPage, home::HomePage, project::ProjectsPage};
+use crate::{about::AboutPage, contact::ContactPage, home::HomePage, project::ProjectsPage};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -68,6 +68,12 @@ pub fn App() -> impl IntoView {
                     />
 
                     <Route path=path!("about/") view=AboutPage
+                        ssr=SsrMode::Static(
+                            StaticRoute::new(),
+                        )
+                    />
+
+                    <Route path=path!("contact/") view=ContactPage
                         ssr=SsrMode::Static(
                             StaticRoute::new(),
                         )

@@ -2,9 +2,10 @@ use leptos::{either::Either, prelude::*};
 use leptos_router::components::A;
 
 use crate::{
+    about::MyStory,
     footer::Footer,
     header::{Header, MenuPage},
-    project::{Project, ProjectCard, PROJECTS},
+    project::{ProjectCard, PROJECTS},
     utils::Pairs,
 };
 
@@ -89,20 +90,8 @@ pub fn HomePage() -> impl IntoView {
         </div>
 
         <div class="h-20" />
-        <div class="px-20 flex flex-col">
-            <h2 class="text-5xl font-semibold text-left"> "My Story" <span class="text-accent"> "." </span> </h2>
-            <div class="h-6" />
 
-            <p class="text-left text-slate-300 text-lg whitespace-pre-line">
-                r#"From a young age, I was drawn to computers, experimenting with technology even before we had a TV at home. I started building games with no-code engines, eventually learning to code. After pursuing a degree in computer science at Delhi University, I quickly picked up new technologies like Flutter and developed my first app, MusicPiped, which gained traction in the open-source community.
-
-During the pandemic, I developed multiplayer games to connect friends online. This experience, coupled with my role as a frontend developer at Akudo, a fintech organization, deepened my technical expertise. I also ventured into Rust programming, finding joy in its capabilities.
-
-My passion for creating connective technologies continued with apps like SyncPlayer (later TVMate) for shared video experiences. Currently, I'm applying my skills at Mitsu.care, developing solutions for assisted self-therapy.
-
-Throughout my career, I've remained committed to crafting solutions that bring people closer together, one app at a time."#
-            </p>
-        </div>
+        <MyStory />
 
         <div class="h-20" />
 

@@ -1,5 +1,6 @@
 pub mod about;
 pub mod app;
+pub mod contact;
 pub mod footer;
 pub mod header;
 pub mod home;
@@ -10,7 +11,6 @@ pub mod utils;
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]
 pub fn hydrate() {
-    use crate::app::*;
     console_error_panic_hook::set_once();
     leptos::mount::hydrate_islands();
 }

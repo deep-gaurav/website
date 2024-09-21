@@ -1,3 +1,5 @@
+use std::borrow::Cow;
+
 use leptos::prelude::*;
 use leptos_meta::Script;
 
@@ -26,6 +28,13 @@ pub fn AboutPage() -> impl IntoView {
                 </div>
             </div>
         </div>
+
+        <div class="h-20" />
+        <MyStory />
+
+        <div class="h-20" />
+        <MyExperience />
+
         <div class="h-20" />
 
         <Footer />
@@ -90,11 +99,89 @@ fn TechStack() -> impl IntoView {
 #[component]
 fn Location() -> impl IntoView {
     view! {
-        <div class="bg-white/10 overflow-hidden rounded-md flex justify-center">
+        <div class="bg-white/10 overflow-hidden rounded-md flex justify-center items-center">
             <div class="aspect-square w-full max-w-[400px]">
                 <canvas id="cobe" class="w-full h-full cursor-grab" />
                 <Script defer="true" type_="module" src="/assets/scripts/cobe.js" />
             </div>
+            <div class="text-slate-200 text-lg flex gap-4 items-center">
+                <div class="w-4 h-4 bg-accent rounded-full" />
+                "Delhi NCR, India"
+            </div>
+        </div>
+    }
+}
+
+#[component]
+pub fn MyStory() -> impl IntoView {
+    view! {
+        <div class="px-20 flex flex-col">
+            <h2 class="text-5xl font-semibold text-left"> "My Story" <span class="text-accent"> "." </span> </h2>
+            <div class="h-6" />
+
+            <p class="text-left text-slate-300 text-lg whitespace-pre-line">
+                r#"From a young age, I was drawn to computers, experimenting with technology even before we had a TV at home. I started building games with no-code engines, eventually learning to code. After pursuing a degree in computer science at Delhi University, I quickly picked up new technologies like Flutter and developed my first app, MusicPiped, which gained traction in the open-source community.
+
+    During the pandemic, I developed multiplayer games to connect friends online. This experience, coupled with my role as a frontend developer at Akudo, a fintech organization, deepened my technical expertise. I also ventured into Rust programming, finding joy in its capabilities.
+
+    My passion for creating connective technologies continued with apps like SyncPlayer (later TVMate) for shared video experiences. Currently, I'm applying my skills at Mitsu.care, developing solutions for assisted self-therapy.
+
+    Throughout my career, I've remained committed to crafting solutions that bring people closer together, one app at a time."#
+            </p>
+        </div>
+    }
+}
+
+#[component]
+pub fn MyExperience() -> impl IntoView {
+    struct Experience {
+        company: Cow<'static, str>,
+        designation: Cow<'static, str>,
+        content: Cow<'static, str>,
+    }
+
+    const EXPERIENCES: &[Experience] = &[
+        Experience {
+            company: Cow::Borrowed("Akudo"),
+            designation: Cow::Borrowed("Software Engineer"),
+            content: Cow::Borrowed(
+                r#"During my time at Akudo Technologies, I led the development of a core fintech app built on Flutter, which achieved over 1.5 million downloads. I was instrumental in designing and implementing UPI on PPI, driving a 5x increase in transaction volume. Additionally, I developed an automated A/B testing system that empowered the product team to conduct real-time tests, leading to significant improvements in user experience. I also took on a mentorship role, guiding interns and junior developers, helping them grow in their professional journeys.
+
+Earlier in my tenure as a Software Engineer, I contributed to the launch and maintenance of the company's flagship app from day one. I created a highly efficient build automation platform that reduced testing time and sped up the release cycle. I also engineered a custom Parallel BLoC system that reduced app startup time by 3x and integrated multiple payment gateways, helping to streamline the app's financial operations."#,
+            ),
+        },
+        Experience {
+            company: Cow::Borrowed("Mitsu"),
+            designation: Cow::Borrowed("Frontend Developer"),
+            content: Cow::Borrowed(
+                r#"At Mitsu.care, I lead front-end development for a self-therapy app, aiming to support those with anxiety and depression. My goal is to create intuitive and seamless user experiences.
+
+Since joining in August 2023, I've developed a web app version, significantly improving onboarding, and maintain user-facing interfaces across the app, web flow, website, and admin dashboard using Flutter, React JS, and Wordpress."#,
+            ),
+        },
+    ];
+    view! {
+        <div class="px-20 flex flex-col">
+            <h2 class="text-5xl font-semibold text-left"> "My Experience" <span class="text-accent"> "." </span> </h2>
+            <div class="h-10" />
+
+            {
+                EXPERIENCES.iter().enumerate().map(|(index,experience)|{
+                    view! {
+                        <div>
+                            <div class="flex">
+                                <div class="ml-4 text-5xl font-bold flex-shrink-0 w-32 text-left"> {format!("{:02}", index+1)}  </div>
+                                <div class="text-left flex flex-col">
+                                    <div class="text-accent"> {experience.designation.as_ref()} </div>
+                                    <div class="font-bold text-2xl"> {experience.company.as_ref()} </div>
+                                    <div class="text-slate-300 w-full whitespace-break-spaces"> {experience.content.as_ref()} </div>
+                                </div>
+                            </div>
+                            <div class="h-12" />
+                        </div>
+                    }
+                }).collect_view()
+            }
         </div>
     }
 }
