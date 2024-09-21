@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
+use leptos_meta::{provide_meta_context, MetaTags, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
     path,
@@ -7,7 +7,7 @@ use leptos_router::{
     SsrMode, StaticSegment,
 };
 
-use crate::{about::AboutPage, header::Header, home::HomePage, project::ProjectsPage};
+use crate::{about::AboutPage, home::HomePage, project::ProjectsPage};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
