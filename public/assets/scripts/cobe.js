@@ -5,7 +5,7 @@ let canvas = document.getElementById("cobe")
 
 let width = canvas.offsetWidth;
 const globe = createGlobe(canvas, {
-    devicePixelRatio: window.devicePixelRatio,
+    devicePixelRatio: 2,
     width: width * 2,
     height: width * 2,
     phi: 0,
@@ -36,10 +36,6 @@ canvas.onpointerup = () => {
     pointerInteracting = null;
     canvas.style.cursor = 'grab';
 }
-canvas.onpointerout = () => {
-    pointerInteracting = null;
-    canvas.style.cursor = 'grab';
-}
 canvas.onmousemove = (e) => {
     if (pointerInteracting) {
         const delta = e.clientX - pointerInteracting;
@@ -47,10 +43,22 @@ canvas.onmousemove = (e) => {
         phi += delta / 200
     }
 }
+canvas.ontouchstart = (e) => {
+    pointerInteracting =
+        e.touches[0].clientX;
+}
+
+canvas.ontouchend = (e) => {
+    pointerInteracting =
+        null;
+}
+
+
 canvas.ontouchmove = (e) => {
     if (pointerInteracting && e.touches[0]) {
         const delta = e.touches[0].clientX - pointerInteracting;
-        pointerInteracting = e.clientX
+        console.log({ delta, 'x': e.touches[0].clientX })
+        pointerInteracting = e.touches[0].clientX
         phi += delta / 100
     }
 }
