@@ -5,7 +5,7 @@ use crate::{
     about::MyStory,
     footer::Footer,
     header::{Header, MenuPage},
-    project::{ProjectCard, PROJECTS},
+    project::{ProjectCard, ProjectList, PROJECTS},
     utils::Pairs,
 };
 
@@ -28,7 +28,7 @@ pub fn HomePage() -> impl IntoView {
                         "Developer"
                     </h1>
                     <div class="h-8" />
-                    <h2 class="text-left text-xl text-slate-300" > "I'm a software developer from India."<br/>"I love solving problems that bring people a little closer." </h2>
+                    <h2 class="text-left text-lg md:text-xl text-slate-300" > "I'm a software developer from India."<br/>"I love solving problems that bring people a little closer." </h2>
                     <div class="h-6" />
                     <div class="flex gap-4">
                         <A href={MenuPage::Contact.path()} {..view! {< {..} class="p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}} > "Get In Touch" </A>
@@ -45,7 +45,7 @@ pub fn HomePage() -> impl IntoView {
                 <div class="flex-grow" />
             </div>
         </div>
-        <div class="px-20 flex flex-col">
+        <div class="px-8 md:px-20 flex flex-col">
             <h2 class="text-5xl font-semibold text-left"> "Projects" <span class="text-accent"> "." </span> </h2>
             <div class="h-6" />
 
@@ -53,34 +53,9 @@ pub fn HomePage() -> impl IntoView {
             {
                 let project_pairs = Pairs::new( &PROJECTS[..3.min(PROJECTS.len())]);
 
-                project_pairs.into_iter().enumerate().map(|(index, (project1, project2))|{
-                    let (mut style1, mut style2) = ("flex-basis:40%; flex-grow:4;", "flex-basis:60%; flex-grow:6;");
-                    if index %2== 0 {
-                        (style1, style2) = (style2, style1);
-                    }
-                    view! {
-                        <div class="flex gap-10">
-                            <div
-                                style=style1
-                            >
-                                <ProjectCard project=project1 />
-                            </div>
-                            {
-                                if let Some(project2) = project2 {
-                                    Either::Left(view! {
-                                        <div
-                                            style=style2
-                                        >
-                                            <ProjectCard project=project2 />
-                                        </div>
-                                    })
-                                }else{
-                                    Either::Right(())
-                                }
-                            }
-                        </div>
-                    }
-                }).collect_view()
+                view! {
+                    <ProjectList project_pairs />
+                }
             }
             </div>
             <div class="h-8" />

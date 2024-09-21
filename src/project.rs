@@ -51,7 +51,7 @@ pub const PROJECTS: &[Project] = &[
 #[component]
 pub fn ProjectCard<'a>(project: &'a Project) -> impl IntoView + use<'a> {
     view! {
-        <img class="rounded-xl h-80 w-full object-cover" src=project.cover_image.as_ref() />
+        <img class="rounded-xl h-80 w-full object-cover bg-white/10" src=project.cover_image.as_ref() />
         <div class="h-4" />
         <h3 class="text-left text-3xl font-semibold"> {project.name.as_ref()} </h3>
         <div class="h-2" />
@@ -76,34 +76,9 @@ pub fn ProjectsPage() -> impl IntoView {
                 {
                     let project_pairs = Pairs::new(PROJECTS);
 
-                    project_pairs.into_iter().enumerate().map(|(index, (project1, project2))|{
-                        let (mut style1, mut style2) = ("flex-basis:40%; flex-grow:4;", "flex-basis:60%; flex-grow:6;");
-                        if index %2== 0 {
-                            (style1, style2) = (style2, style1);
-                        }
-                        view! {
-                            <div class="flex gap-10">
-                                <div
-                                    style=style1
-                                >
-                                    <ProjectCard project=project1 />
-                                </div>
-                                {
-                                    if let Some(project2) = project2 {
-                                        Either::Left(view! {
-                                            <div
-                                                style=style2
-                                            >
-                                                <ProjectCard project=project2 />
-                                            </div>
-                                        })
-                                    }else{
-                                        Either::Right(())
-                                    }
-                                }
-                            </div>
-                        }
-                    }).collect_view()
+                    view! {
+                        <ProjectList project_pairs />
+                    }
                 }
             </div>
         </div>
@@ -111,4 +86,43 @@ pub fn ProjectsPage() -> impl IntoView {
         <div class="h-20" />
         <Footer />
     }
+}
+
+#[component]
+pub fn ProjectList<'a>(project_pairs: Pairs<'a, Project>) -> impl IntoView + use<'a> {
+    project_pairs
+        .into_iter()
+        .enumerate()
+        .map(|(index, (project1, project2))| {
+            let (mut style1, mut style2) = (
+                "flex-basis:40%; flex-grow:4;",
+                "flex-basis:60%; flex-grow:6;",
+            );
+            if index % 2 == 0 {
+                (style1, style2) = (style2, style1);
+            }
+            view! {
+                <div class="flex gap-10 flex-col md:flex-row">
+                    <div
+                        style=style1
+                    >
+                        <ProjectCard project=project1 />
+                    </div>
+                    {
+                        if let Some(project2) = project2 {
+                            Either::Left(view! {
+                                <div
+                                    style=style2
+                                >
+                                    <ProjectCard project=project2 />
+                                </div>
+                            })
+                        }else{
+                            Either::Right(())
+                        }
+                    }
+                </div>
+            }
+        })
+        .collect_view()
 }

@@ -115,7 +115,7 @@ fn Location() -> impl IntoView {
 #[component]
 pub fn MyStory() -> impl IntoView {
     view! {
-        <div class="px-20 flex flex-col">
+        <div class="px-8 md:px-20 flex flex-col">
             <h2 class="text-5xl font-semibold text-left"> "My Story" <span class="text-accent"> "." </span> </h2>
             <div class="h-6" />
 
