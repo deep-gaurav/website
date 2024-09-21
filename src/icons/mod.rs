@@ -5,6 +5,8 @@ pub enum Icons {
     Github,
     LinkedIn,
     Star,
+    Menu,
+    Close,
 }
 
 impl Icons {
@@ -14,6 +16,8 @@ impl Icons {
             Icons::Github => include_str!("linkedin.svg"),
             Icons::LinkedIn => include_str!("github.svg"),
             Icons::Star => include_str!("star.svg"),
+            Icons::Menu => include_str!("menu.svg"),
+            Icons::Close => include_str!("close.svg"),
         }
     }
 }
