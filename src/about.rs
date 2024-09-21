@@ -8,8 +8,9 @@ use crate::{footer::Footer, header::Header, icons::Icon};
 #[component]
 pub fn AboutPage() -> impl IntoView {
     view! {
-        <Header />
         <div class="flex flex-col px-8 md:px-20">
+            <Header />
+
             <div class="h-20" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> "About me"<span class="text-accent">"."</span></h1>
             <div class="h-8" />

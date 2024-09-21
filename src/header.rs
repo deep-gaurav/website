@@ -75,7 +75,7 @@ pub fn Header() -> impl IntoView {
             }
         </nav>
 
-        <div class="flex px-4 py-6 md:hidden">
+        <div class="flex py-6 md:hidden">
             <div class="flex-grow" />
             <button
                 on:click=move|_|{
