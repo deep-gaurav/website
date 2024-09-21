@@ -6,7 +6,7 @@ use crate::{footer::Footer, header::Header, icons::Icon};
 #[component]
 pub fn ContactPage() -> impl IntoView {
     view! {
-        <div class="min-h-dvh w-full flex flex-col px-8 md:px-20">
+        <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
             <Header />
 
             <div class="flex-grow w-full flex flex-col md:flex-row justify-stretch items-center">
