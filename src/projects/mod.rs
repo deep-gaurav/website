@@ -1,4 +1,3 @@
-use anyhow::anyhow;
 use leptos::either::Either;
 use leptos::prelude::*;
 use leptos_router::hooks::use_params;
@@ -10,14 +9,19 @@ use yaml_rust2::{Yaml, YamlLoader};
 
 pub mod project_view;
 
-use crate::project::Project;
-
 #[derive(Serialize, Deserialize, Clone)]
 pub struct ProjectData {
     pub title: String,
+    pub tagline: String,
     pub cover_url: String,
     pub short_description: String,
     pub slug: String,
+    pub stack: Option<String>,
+    pub web_url: Option<String>,
+    pub play_store_url: Option<String>,
+    pub backend_source: Option<String>,
+    pub frontend_source: Option<String>,
+
     pub html: String,
 }
 
@@ -86,10 +90,42 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
             .get(&Yaml::from_str("short_description"))
             .and_then(|t| t.as_str())
             .ok_or(ServerFnError::new("no short short_description"))?;
+
+        let tagline = doc
+            .get(&Yaml::from_str("tagline"))
+            .and_then(|t| t.as_str())
+            .ok_or(ServerFnError::new("no short tagline"))?;
         let cover_url = doc
             .get(&Yaml::from_str("cover"))
             .and_then(|t| t.as_str())
             .ok_or(ServerFnError::new("no cover in yaml"))?;
+
+        let stack = doc
+            .get(&Yaml::from_str("stack"))
+            .map(|t| t.as_str())
+            .flatten()
+            .map(|t| t.to_string());
+        let web_url = doc
+            .get(&Yaml::from_str("web_url"))
+            .map(|t| t.as_str())
+            .flatten()
+            .map(|t| t.to_string());
+        let play_store_url = doc
+            .get(&Yaml::from_str("play_store_url"))
+            .map(|t| t.as_str())
+            .flatten()
+            .map(|t| t.to_string());
+        let backend_source = doc
+            .get(&Yaml::from_str("play_store_url"))
+            .map(|t| t.as_str())
+            .flatten()
+            .map(|t| t.to_string());
+        let frontend_source = doc
+            .get(&Yaml::from_str("play_store_url"))
+            .map(|t| t.as_str())
+            .flatten()
+            .map(|t| t.to_string());
+
         let html = markdown::to_html_with_options(
             &content,
             &Options {
@@ -109,7 +145,14 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
             cover_url: cover_url.to_string(),
             short_description: short_description.to_string(),
             slug: slug,
+            tagline: tagline.to_string(),
             html,
+
+            stack,
+            web_url,
+            play_store_url,
+            backend_source,
+            frontend_source,
         })
     } else {
         Err(ServerFnError::new("node not yaml"))

@@ -60,6 +60,13 @@ lto = true
 codegen-units = 1
 panic = "abort"
 
+
+[profile.dev]
+opt-level = 0
+
+[profile.bindev]
+inherits = "dev"
+
 [package.metadata.leptos]
 
 bin-target = "websitebin"
@@ -125,6 +132,10 @@ lib-default-features = false
 #
 # Optional. Defaults to "release".
 lib-profile-release = "wasm-release"
+
+
+bin-profile-release = "binrelease"
+bin-profile-dev = "bindev"
 
 
 # The tailwind input file.

@@ -1,8 +1,15 @@
 ---
-title: "BillDivide: The Simplest Way to Split Bills with Friends and Family"
-cover: "assets/images/billdivide/cover.png"
+title: "BillDivide"
+cover: "/assets/images/projects/billdivide/cover.png"
+tagline: "The Simplest Way to Split Bills with Friends and Family"
 short_description: "BillDivide is a simple and easy-to-use app that lets you split bills with friends, family, or anyone else. Whether you're dining out, going on vacation, or just sharing household expenses, BillDivide makes it easy to track who owes what and settle up quickly and easily."
 
+stack: Flutter, Rust, GraphQL, SQLite, Litestream
+web_url: https://billdive.app/
+play_store_url: https://play.google.com/store/apps/details?id=app.billdivide
+
+backend_source: https://github.com/deep-gaurav/deep-split-be/
+frontend_source: https://github.com/deep-gaurav/splitbuddy/
 ---
 
 ## Overview

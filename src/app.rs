@@ -11,7 +11,7 @@ use crate::{
     about::AboutPage,
     contact::ContactPage,
     home::HomePage,
-    project::{ProjectsPage, PROJECTS},
+    project::ProjectsPage,
     projects::{list_project_slugs, ProjectPage},
 };
 

@@ -7,6 +7,8 @@ pub enum Icons {
     Star,
     Menu,
     Close,
+    GooglePlay,
+    Web,
 }
 
 impl Icons {
@@ -18,6 +20,8 @@ impl Icons {
             Icons::Star => include_str!("star.svg"),
             Icons::Menu => include_str!("menu.svg"),
             Icons::Close => include_str!("close.svg"),
+            Icons::GooglePlay => include_str!("google-play.svg"),
+            Icons::Web => include_str!("globe.svg"),
         }
     }
 }
