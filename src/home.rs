@@ -12,16 +12,17 @@ use crate::{
 #[component]
 pub fn HomePage() -> impl IntoView {
     view! {
-        <div class="min-h-dvh w-full flex flex-col px-20">
+        <div class="min-h-dvh w-full flex flex-col px-8 md:px-20">
             <Header />
 
-            <div class="flex-grow w-full flex  justify-stretch items-center">
+            <div class="flex-grow w-full flex flex-col md:flex-row justify-stretch items-center">
+                <div class="flex-grow min-h-2" />
                 <div class="flex flex-col">
                     <div class="text-slate-300 text-lg text-left">
                         "Hi, I'm Deep 👋"
                     </div>
                     <div class="h-6" />
-                    <h1 class="text-7xl font-bold text-left ">
+                    <h1 class="text-5xl md:text-7xl font-bold text-left ">
                         <span class="text-accent"> "Software" </span>
                         <br/>
                         "Developer"
@@ -35,12 +36,13 @@ pub fn HomePage() -> impl IntoView {
                     </div>
                 </div>
 
-                <div class="flex-grow" />
-                <div class="p-10 border border-solid border-accent rounded-full w-[30%]">
+                <div class="flex-grow min-h-2 flex-shrink-0" />
+                <div class="p-8 border border-solid border-accent rounded-full w-full md:w-[30%]">
                     <div class="rounded-full relative overflow-hidden w-full aspect-square">
                         <img class="inline h-full w-full object-cover" src="/assets/images/deep.webp" />
                     </div>
                 </div>
+                <div class="flex-grow" />
             </div>
         </div>
         <div class="px-20 flex flex-col">

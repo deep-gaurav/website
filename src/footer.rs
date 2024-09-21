@@ -15,7 +15,7 @@ pub fn Footer() -> impl IntoView {
 
     view! {
         <footer class="flex flex-col px-20">
-            <div class="flex">
+            <div class="flex flex-col md:flex-row">
                 <nav class="flex justify-center gap-4 text-slate-300 font-semibold text-lg">
                     {
                         pages.iter().map(|page| {
@@ -33,7 +33,7 @@ pub fn Footer() -> impl IntoView {
                 </div>
             </div>
             <div class="h-10" />
-            <div class="flex">
+            <div class="flex flex-col md:flex-row">
                 <div class="flex flex-col gap-4" >
                     <div class="text-xl font-semibold"> "Interested in working together" <span class="text-accent"> "?" </span> </div>
                     <div class="flex gap-4">
