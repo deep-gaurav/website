@@ -45,7 +45,6 @@ canvas.onmousemove = (e) => {
         const delta = e.clientX - pointerInteracting;
         pointerInteracting = e.clientX
         phi += delta / 200
-        console.log(phi)
     }
 }
 canvas.ontouchmove = (e) => {
