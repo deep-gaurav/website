@@ -1,11 +1,11 @@
-use leptos::{either::Either, prelude::*};
+use leptos::prelude::*;
 use leptos_router::components::A;
 
 use crate::{
     about::MyStory,
     footer::Footer,
     header::{Header, MenuPage},
-    project::{ProjectCard, ProjectList, PROJECTS},
+    project::{ProjectList, PROJECTS},
     utils::Pairs,
 };
 
