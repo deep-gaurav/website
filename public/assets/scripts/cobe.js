@@ -57,7 +57,6 @@ canvas.ontouchend = (e) => {
 canvas.ontouchmove = (e) => {
     if (pointerInteracting && e.touches[0]) {
         const delta = e.touches[0].clientX - pointerInteracting;
-        console.log({ delta, 'x': e.touches[0].clientX })
         pointerInteracting = e.touches[0].clientX
         phi += delta / 100
     }
