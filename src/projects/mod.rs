@@ -21,6 +21,7 @@ pub struct ProjectData {
     pub play_store_url: Option<String>,
     pub backend_source: Option<String>,
     pub frontend_source: Option<String>,
+    pub screenshots: Vec<String>,
 
     pub html: String,
 }
@@ -125,6 +126,16 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
             .map(|t| t.as_str())
             .flatten()
             .map(|t| t.to_string());
+        let screenshots = doc
+            .get(&Yaml::from_str("screenshots"))
+            .map(|t| t.as_vec())
+            .flatten()
+            .map(|t| {
+                t.clone()
+                    .into_iter()
+                    .filter_map(|t| t.as_str().map(|t| t.to_string()))
+                    .collect::<Vec<_>>()
+            });
 
         let html = markdown::to_html_with_options(
             &content,
@@ -146,6 +157,7 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
             short_description: short_description.to_string(),
             slug: slug,
             tagline: tagline.to_string(),
+            screenshots: screenshots.unwrap_or_default(),
             html,
 
             stack,

@@ -131,6 +131,27 @@ pub fn ProjectView(project: ProjectData) -> impl IntoView {
 
                 <div class="text-left text-slate-300 project-md" inner_html={project.html} />
             </div>
+
+            {
+                if !project.screenshots.is_empty() {
+                    Either::Left(view! {
+                        <div class="h-10" />
+                        <h2 class="text-5xl md:text-6xl font-bold text-left"> "Screenshots" <span class="text-accent"> "." </span> </h2>
+
+                        <div class="h-4" />
+                        <div class="flex gap-4 h-80 overflow-auto">
+                            {
+                                project.screenshots.into_iter().map(|sc_url|view! {
+                                    <img class="h-full rounded" src=sc_url />
+                                }).collect_view()
+                            }
+                        </div>
+                    })
+                }else{
+                    Either::Right(())
+                }
+            }
+            <div class="h-8" />
         </div>
 
         <div class="h-20" />
