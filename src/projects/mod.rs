@@ -213,11 +213,17 @@ pub fn ProjectPage() -> impl IntoView {
             Ok(slug) => get_project(slug).await.map_err(|e| format!("{e:#?}")),
         }
     });
+    let projects_resource = Resource::new_blocking(
+        || (),
+        |_| async move { list_projects().await.unwrap_or_default() },
+    );
+
     let post_view = move || {
         Suspend::new(async move {
+            let projects = projects_resource.await;
             match project_resource.await {
                 Ok(project) => Either::Left({
-                    view! {<ProjectView project />}
+                    view! {<ProjectView project projects />}
                 }),
                 Err(e) => Either::Right(view! {{e}}),
             }

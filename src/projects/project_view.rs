@@ -1,11 +1,11 @@
 use leptos::{either::Either, prelude::*};
 
-use crate::{footer::Footer, header::Header, icons::Icon};
+use crate::{footer::Footer, header::Header, icons::Icon, project::ProjectList, utils::Pairs};
 
 use super::ProjectData;
 
 #[component]
-pub fn ProjectView(project: ProjectData) -> impl IntoView {
+pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl IntoView {
     view! {
         <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
             <Header />
@@ -136,7 +136,7 @@ pub fn ProjectView(project: ProjectData) -> impl IntoView {
                 if !project.screenshots.is_empty() {
                     Either::Left(view! {
                         <div class="h-10" />
-                        <h2 class="text-5xl md:text-6xl font-bold text-left"> "Screenshots" <span class="text-accent"> "." </span> </h2>
+                        <h2 class="text-5xl md:text-5xl font-bold text-left"> "Screenshots" <span class="text-accent"> "." </span> </h2>
 
                         <div class="h-4" />
                         <div class="flex gap-4 h-80 overflow-auto">
@@ -150,6 +150,39 @@ pub fn ProjectView(project: ProjectData) -> impl IntoView {
                 }else{
                     Either::Right(())
                 }
+            }
+            {
+                let index = projects.iter().position(|p|p.slug == project.slug);
+                if let Some(index) = index {
+                    let len = projects.len();
+                    let mut circulariter = projects.into_iter().cycle();
+                    let adjusted_index = if index <= 0 {
+                        len + index
+                    } else {
+                        index
+                    };
+                    let prev = circulariter.nth(adjusted_index-1);
+                    let next = circulariter.nth(1);
+                    if let (Some(prev), Some(next)) = (prev,next) {
+
+                        let project_pairs = Pairs::new(vec![prev,next].into_iter());
+                        Either::Left(
+                            view! {
+                                <div class="h-20" />
+                                <h2 class="text-5xl md:text-5xl font-bold text-left"> "More Projects" <span class="text-accent"> "." </span> </h2>
+
+                                <div class="h-4" />
+                                <ProjectList project_pairs is_staggered=false />
+                            }
+                        )
+                    }else{
+
+                        Either::Right(())
+                    }
+                }else {
+                    Either::Right(())
+                }
+
             }
             <div class="h-8" />
         </div>

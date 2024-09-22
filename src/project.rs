@@ -66,18 +66,29 @@ pub fn ProjectsPage() -> impl IntoView {
 }
 
 #[component]
-pub fn ProjectList<I>(project_pairs: Pairs<I>) -> impl IntoView
+pub fn ProjectList<I>(
+    project_pairs: Pairs<I>,
+    #[prop(optional)] is_staggered: Option<bool>,
+) -> impl IntoView
 where
     I: Iterator<Item = ProjectData> + ExactSizeIterator,
 {
+    let is_staggered = is_staggered.unwrap_or(true);
     project_pairs
         .into_iter()
         .enumerate()
         .map(|(index, (project1, project2))| {
-            let (mut style1, mut style2) = (
-                "flex-basis:40%; flex-grow:4;",
-                "flex-basis:60%; flex-grow:6;",
-            );
+            let (mut style1, mut style2) = if is_staggered {
+                (
+                    "flex-basis:40%; flex-grow:4;",
+                    "flex-basis:60%; flex-grow:6;",
+                )
+            } else {
+                (
+                    "flex-basis:50%; flex-grow:5;",
+                    "flex-basis:50%; flex-grow:5;",
+                )
+            };
             if index % 2 == 0 {
                 (style1, style2) = (style2, style1);
             }
