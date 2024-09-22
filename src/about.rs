@@ -1,13 +1,15 @@
 use std::borrow::Cow;
 
 use leptos::prelude::*;
-use leptos_meta::Script;
+use leptos_meta::{Script, Title};
 
-use crate::{footer::Footer, header::Header, icons::Icon};
+use crate::{footer::Footer, header::Header, icons::Icon, utils::title::get_title};
 
 #[component]
 pub fn AboutPage() -> impl IntoView {
     view! {
+        <Title text=get_title("About") />
+
         <div class="flex flex-col px-8 md:px-20">
             <Header />
 

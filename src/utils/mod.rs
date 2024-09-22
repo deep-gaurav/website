@@ -1,3 +1,5 @@
+pub mod title;
+
 pub struct Pairs<I>
 where
     I: Iterator + ExactSizeIterator,

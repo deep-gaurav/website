@@ -1,11 +1,14 @@
 use leptos::prelude::*;
+use leptos_meta::Title;
 use leptos_router::components::A;
 
-use crate::{footer::Footer, header::Header, icons::Icon};
+use crate::{footer::Footer, header::Header, icons::Icon, utils::title::get_title};
 
 #[component]
 pub fn ContactPage() -> impl IntoView {
     view! {
+        <Title text=get_title("Contact") />
+
         <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
             <Header />
 

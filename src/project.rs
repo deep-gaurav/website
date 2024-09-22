@@ -1,11 +1,12 @@
 use leptos::{either::Either, prelude::*};
+use leptos_meta::Title;
 
 use crate::{
     footer::Footer,
     header::Header,
     icons::Icon,
     projects::{list_projects, ProjectData},
-    utils::Pairs,
+    utils::{title::get_title, Pairs},
 };
 
 #[component]
@@ -34,6 +35,7 @@ pub fn ProjectsPage() -> impl IntoView {
     );
 
     view! {
+        <Title text=get_title("Projects") />
         <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
             <Header />
 

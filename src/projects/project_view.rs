@@ -1,12 +1,21 @@
 use leptos::{either::Either, prelude::*};
+use leptos_meta::Title;
 
-use crate::{footer::Footer, header::Header, icons::Icon, project::ProjectList, utils::Pairs};
+use crate::{
+    footer::Footer,
+    header::Header,
+    icons::Icon,
+    project::ProjectList,
+    utils::{title::get_title, Pairs},
+};
 
 use super::ProjectData;
 
 #[component]
 pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl IntoView {
     view! {
+        <Title text=get_title(&project.title) />
+
         <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
             <Header />
 
