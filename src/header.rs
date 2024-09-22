@@ -65,7 +65,9 @@ pub fn Header() -> impl IntoView {
 
     view! {
 
-        <nav class="justify-center gap-4 text-slate-300 font-semibold text-xl p-5 hidden md:flex">
+        <nav class="justify-center gap-4 text-slate-300 font-semibold text-xl py-5 hidden md:flex items-center">
+            <a href={MenuPage::Home.path()}> <img class="h-10" src="/assets/images/icon.png" /> </a>
+            <div class="flex-grow" />
             {
                 desktop_pages.iter().map(|page| {
                     view! {
@@ -73,9 +75,13 @@ pub fn Header() -> impl IntoView {
                     }
                 }).collect_view()
             }
+            <div class="flex-grow" />
+
+            <a href={MenuPage::Contact.path()}> <Icon icon=crate::icons::Icons::Chat /> </a>
         </nav>
 
         <div class="flex py-6 md:hidden">
+            <a href={MenuPage::Home.path()}> <img class="h-10" src="/assets/images/icon.png" /> </a>
             <div class="flex-grow" />
             <button
                 on:click=move|_|{
