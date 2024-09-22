@@ -1,12 +1,11 @@
 use leptos::{either::Either, prelude::*};
-use leptos_meta::Title;
 
 use crate::{
     footer::Footer,
     header::Header,
     icons::Icon,
     projects::{list_projects, ProjectData},
-    utils::{title::get_title, Pairs},
+    utils::{title::SiteMeta, Pairs},
 };
 
 #[component]
@@ -35,16 +34,19 @@ pub fn ProjectsPage() -> impl IntoView {
     );
 
     view! {
-        <Title text=get_title("Projects") />
-        <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
-            <Header />
+        <SiteMeta title="Projects" />
+        <Header />
+
+        <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">
 
             <div class="h-10 md:h-20" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> "My "<span class="text-accent">"Digital"</span>" Creations" </h1>
             <div class="h-8" />
             <h2 class="text-left text-xl text-slate-300" > "From social apps to cloud solutions: a showcase of innovative projects solving real-world problems" </h2>
 
-            <div class="h-20" />
+        </div>
+        <div class="w-full flex flex-col px-8 md:px-20">
+            <div class="h-10" />
             <div class="flex flex-col gap-10">
                 {
                     Suspend::new(

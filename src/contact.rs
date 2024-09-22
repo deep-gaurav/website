@@ -1,16 +1,15 @@
 use leptos::prelude::*;
-use leptos_meta::Title;
 use leptos_router::components::A;
 
-use crate::{footer::Footer, header::Header, icons::Icon, utils::title::get_title};
+use crate::{footer::Footer, header::Header, icons::Icon, utils::title::SiteMeta};
 
 #[component]
 pub fn ContactPage() -> impl IntoView {
     view! {
-        <Title text=get_title("Contact") />
+        <SiteMeta title="Contact" />
+        <Header />
 
-        <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
-            <Header />
+        <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">
 
             <div class="flex-grow w-full flex flex-col md:flex-row justify-stretch items-center">
                 <div class="flex-grow md:flex-grow-0" />

@@ -1,5 +1,4 @@
 use leptos::prelude::*;
-use leptos_meta::Title;
 use leptos_router::components::A;
 
 use crate::{
@@ -8,7 +7,7 @@ use crate::{
     header::{Header, MenuPage},
     project::ProjectList,
     projects::list_projects,
-    utils::{title::get_title, Pairs},
+    utils::{title::SiteMeta, Pairs},
 };
 
 #[component]
@@ -18,10 +17,10 @@ pub fn HomePage() -> impl IntoView {
         |_| async move { list_projects().await.unwrap_or_default() },
     );
     view! {
-        <Title text=get_title("Home") />
-        <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
-            <Header />
+        <SiteMeta title="Home" />
+        <Header />
 
+        <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">
             <div class="flex-grow w-full flex flex-col md:flex-row justify-stretch items-center">
                 <div class="flex-grow md:flex-grow-0" />
                 <div class="flex flex-col">

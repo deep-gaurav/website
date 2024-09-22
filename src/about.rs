@@ -1,17 +1,17 @@
 use std::borrow::Cow;
 
 use leptos::prelude::*;
-use leptos_meta::{Script, Title};
+use leptos_meta::Script;
 
-use crate::{footer::Footer, header::Header, icons::Icon, utils::title::get_title};
+use crate::{footer::Footer, header::Header, icons::Icon, utils::title::SiteMeta};
 
 #[component]
 pub fn AboutPage() -> impl IntoView {
     view! {
-        <Title text=get_title("About") />
+        <SiteMeta title="About" />
+        <Header />
 
-        <div class="flex flex-col px-8 md:px-20">
-            <Header />
+        <div id="og-image" class="flex flex-col px-8 md:px-20">
 
             <div class="h-20" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> "About me"<span class="text-accent">"."</span></h1>

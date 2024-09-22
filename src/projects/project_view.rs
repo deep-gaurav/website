@@ -1,12 +1,11 @@
 use leptos::{either::Either, prelude::*};
-use leptos_meta::Title;
 
 use crate::{
     footer::Footer,
     header::Header,
     icons::Icon,
     project::ProjectList,
-    utils::{title::get_title, Pairs},
+    utils::{title::SiteMeta, Pairs},
 };
 
 use super::ProjectData;
@@ -14,10 +13,10 @@ use super::ProjectData;
 #[component]
 pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl IntoView {
     view! {
-        <Title text=get_title(&project.title) />
+        <SiteMeta title={project.title.clone()} />
+        <Header />
 
-        <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
-            <Header />
+        <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">
 
             <div class="h-10 md:h-20" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> {project.title} <span class="text-accent"> "." </span> </h1>
@@ -26,6 +25,8 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
             <div class="h-20" />
             <img class="rounded-lg w-full max-h-80 object-cover" src={project.cover_url} />
             <div class="h-10" />
+        </div>
+        <div class="w-full flex flex-col px-8 md:px-20">
             <div class="flex gap-8 relative flex-col md:flex-row">
 
                 <div class="rounded p-4 shadow-accent shadow top-8 md:sticky h-fit text-left flex-shrink-0 flex flex-col gap-4">

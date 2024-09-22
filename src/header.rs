@@ -65,6 +65,8 @@ pub fn Header() -> impl IntoView {
 
     view! {
 
+        <div class="px-8 md:px-20">
+
         <nav class="justify-center gap-4 text-slate-300 font-semibold text-xl py-5 hidden md:flex items-center">
             <a href={MenuPage::Home.path()}> <img class="h-10" src="/assets/images/icon.png" /> </a>
             <div class="flex-grow" />
@@ -115,5 +117,7 @@ pub fn Header() -> impl IntoView {
             }
             <div class="h-8" />
         </nav>
+
+        </div>
     }
 }
