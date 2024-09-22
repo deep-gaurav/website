@@ -142,7 +142,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                         <div class="flex gap-4 h-80 overflow-auto">
                             {
                                 project.screenshots.into_iter().map(|sc_url|view! {
-                                    <img class="h-full rounded" src=sc_url />
+                                    <img loading="lazy" class="h-full rounded" src=sc_url />
                                 }).collect_view()
                             }
                         </div>
