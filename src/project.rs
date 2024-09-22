@@ -37,7 +37,7 @@ pub fn ProjectsPage() -> impl IntoView {
         <SiteMeta title="Projects" />
         <Header />
 
-        <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">
+        <div id="og-image" class=" w-full flex flex-col px-8 md:px-20">
 
             <div class="h-10 md:h-20" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> "My "<span class="text-accent">"Digital"</span>" Creations" </h1>
