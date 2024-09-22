@@ -117,12 +117,12 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
             .flatten()
             .map(|t| t.to_string());
         let backend_source = doc
-            .get(&Yaml::from_str("play_store_url"))
+            .get(&Yaml::from_str("backend_source"))
             .map(|t| t.as_str())
             .flatten()
             .map(|t| t.to_string());
         let frontend_source = doc
-            .get(&Yaml::from_str("play_store_url"))
+            .get(&Yaml::from_str("frontend_source"))
             .map(|t| t.as_str())
             .flatten()
             .map(|t| t.to_string());
