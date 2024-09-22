@@ -17,11 +17,15 @@ pub fn SiteMeta(
         <Title text=get_title(title.get().as_str()) />
         <Meta property="og:type" content="website" />
         <Meta property="og:title" content=get_title(title.get().as_str()) />
-        <Meta property="og:title" content=format!("https://deepgaurav.com{}", location.pathname.get()) />
+        <Meta property="og:url" content=format!("https://deepgaurav.com{}", if location.pathname.get().starts_with("/"){
+            location.pathname.get()
+        }else{
+            format!("/{}",location.pathname.get())
+        }) />
         {
             if gen_img.unwrap_or(true) {
                 Either::Left(view! {
-                    <Meta property="og:image" content="gen_og.jpg" />
+                    <Meta property="og:image" content="./gen_og.jpg" />
                 })
             }else{
                 Either::Right(())
