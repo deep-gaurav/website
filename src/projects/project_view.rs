@@ -16,7 +16,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
         <SiteMeta title={project.title.clone()} />
         <Header />
 
-        <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">
+        <div id="og-image" class="md:min-h-svh w-full flex flex-col px-8 md:px-20">
 
             <div class="h-10 md:h-20" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> {project.title} <span class="text-accent"> "." </span> </h1>
