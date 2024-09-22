@@ -23,9 +23,19 @@ pub fn SiteMeta(
             format!("/{}",location.pathname.get())
         }) />
         {
+            let path = if location.pathname.get().starts_with("/"){
+                location.pathname.get()
+            }else{
+                format!("/{}",location.pathname.get())
+            };
+            let slash = if path.ends_with("/"){
+                ""
+            }else {
+                "/"
+            };
             if gen_img.unwrap_or(true) {
                 Either::Left(view! {
-                    <Meta property="og:image" content="./gen_og.jpg" />
+                    <Meta property="og:image" content=format!("{}{}og_image.jpg", path,slash) />
                 })
             }else{
                 Either::Right(())
