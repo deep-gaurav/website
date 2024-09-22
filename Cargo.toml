@@ -134,7 +134,7 @@ lib-default-features = false
 lib-profile-release = "wasm-release"
 
 
-bin-profile-release = "binrelease"
+# bin-profile-release = "binrelease"
 bin-profile-dev = "bindev"
 
 
