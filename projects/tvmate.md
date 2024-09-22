@@ -8,6 +8,8 @@ web_url: https://tvmate.deepgaurav.com/
 
 frontend_source: https://github.com/deep-gaurav/tvmate
 
+priority: 90
+
 screenshots:
   - "/assets/images/projects/tvmate/sc4.png"
   - "/assets/images/projects/tvmate/sc5.png"

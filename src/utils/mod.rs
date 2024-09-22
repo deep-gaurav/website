@@ -1,29 +1,43 @@
-pub struct Pairs<'a, T> {
-    slice: &'a [T],
-    index: usize,
+pub struct Pairs<I>
+where
+    I: Iterator + ExactSizeIterator,
+{
+    iter: I,
+    first: Option<I::Item>,
 }
 
-impl<'a, T> Pairs<'a, T> {
-    pub fn new(slice: &'a [T]) -> Self {
-        Self { slice, index: 0 }
+impl<I> Pairs<I>
+where
+    I: Iterator + ExactSizeIterator,
+{
+    pub fn new(mut iter: I) -> Self {
+        Self {
+            first: if iter.len() % 2 != 0 {
+                iter.next()
+            } else {
+                None
+            },
+            iter,
+        }
     }
 }
 
-impl<'a, T> Iterator for Pairs<'a, T> {
-    type Item = (&'a T, Option<&'a T>);
+impl<I> Iterator for Pairs<I>
+where
+    I: Iterator + ExactSizeIterator,
+{
+    type Item = (I::Item, Option<I::Item>);
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.index >= self.slice.len() {
-            None
-        } else if self.index == 0 && self.slice.len() % 2 != 0 {
-            let first = &self.slice[self.index];
-            self.index += 1;
-            Some((first, None))
-        } else {
-            let first = &self.slice[self.index];
-            let second = self.slice.get(self.index + 1);
-            self.index += 2;
+        if let Some(value) = self.first.take() {
+            Some((value, None))
+        } else if let Some(first) = self.iter.next() {
+            // If the iterator has a next element, it will be paired
+            let second = self.iter.next();
             Some((first, second))
+        } else {
+            // End of iteration
+            None
         }
     }
 }

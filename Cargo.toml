@@ -34,6 +34,7 @@ tokio-stream = { version = "0.1.16", optional = true, features = ["fs"] }
 yaml-rust2 = { version = "0.8" }
 anyhow = { version = "1" }
 serde = { version = "1", features = ["derive"] }
+futures = "0.3"
 
 [features]
 csr = ["leptos/csr"]

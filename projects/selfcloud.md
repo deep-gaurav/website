@@ -13,6 +13,9 @@ screenshots:
   - "/assets/images/projects/selfcloud/sc5.png"
   - "/assets/images/projects/selfcloud/sc6.png"
   - "/assets/images/projects/selfcloud/sc7.png"
+
+priority: 80
+
 ---
 
 ## Overview

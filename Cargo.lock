@@ -2183,6 +2183,7 @@ dependencies = [
  "anyhow",
  "axum",
  "console_error_panic_hook",
+ "futures",
  "http",
  "leptos",
  "leptos_axum",

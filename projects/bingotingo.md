@@ -14,6 +14,9 @@ screenshots:
   - "/assets/images/projects/bingotingo/sc4.png"
   - "/assets/images/projects/bingotingo/sc5.png"
   - "/assets/images/projects/bingotingo/sc6.png"
+
+priority: 70
+
 ---
 
 ## Overview

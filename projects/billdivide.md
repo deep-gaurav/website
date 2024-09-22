@@ -11,6 +11,8 @@ play_store_url: https://play.google.com/store/apps/details?id=app.billdivide
 backend_source: https://github.com/deep-gaurav/deep-split-be/
 frontend_source: https://github.com/deep-gaurav/splitbuddy/
 
+priority: 100
+
 screenshots:
   - "/assets/images/projects/billdivide/sc1.png"
   - "/assets/images/projects/billdivide/sc2.png"

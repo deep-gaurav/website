@@ -5,12 +5,17 @@ use crate::{
     about::MyStory,
     footer::Footer,
     header::{Header, MenuPage},
-    project::{ProjectList, PROJECTS},
+    project::ProjectList,
+    projects::list_projects,
     utils::Pairs,
 };
 
 #[component]
 pub fn HomePage() -> impl IntoView {
+    let projects_resource = Resource::new_blocking(
+        || (),
+        |_| async move { list_projects().await.unwrap_or_default() },
+    );
     view! {
         <div class="min-h-svh w-full flex flex-col px-8 md:px-20">
             <Header />
@@ -51,11 +56,17 @@ pub fn HomePage() -> impl IntoView {
 
             <div class="flex flex-col gap-10">
             {
-                let project_pairs = Pairs::new( &PROJECTS[..3.min(PROJECTS.len())]);
+                Suspend::new(
+                    async move {
+                        let projects = projects_resource.await;
+                        let project_pairs = Pairs::new(projects.into_iter().take(3));
 
-                view! {
-                    <ProjectList project_pairs />
-                }
+                        view! {
+                            <ProjectList project_pairs />
+                        }
+
+                    }
+                )
             }
             </div>
             <div class="h-8" />

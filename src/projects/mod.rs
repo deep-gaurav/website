@@ -1,3 +1,4 @@
+use futures::{stream::FuturesUnordered, TryStreamExt};
 use leptos::either::Either;
 use leptos::prelude::*;
 use leptos_router::hooks::use_params;
@@ -11,6 +12,7 @@ pub mod project_view;
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct ProjectData {
+    pub priority: i64,
     pub title: String,
     pub tagline: String,
     pub cover_url: String,
@@ -24,6 +26,12 @@ pub struct ProjectData {
     pub screenshots: Vec<String>,
 
     pub html: String,
+}
+
+impl ProjectData {
+    pub fn url(&self) -> String {
+        format!("/projects/{}/", self.slug)
+    }
 }
 
 #[server]
@@ -54,6 +62,18 @@ pub async fn list_project_slugs() -> Result<Vec<String>, ServerFnError> {
         })
         .collect()
         .await)
+}
+
+#[server]
+pub async fn list_projects() -> Result<Vec<ProjectData>, ServerFnError> {
+    let slugs = list_project_slugs().await?;
+    let projects_fut = slugs
+        .into_iter()
+        .map(|slug| get_project(slug))
+        .collect::<FuturesUnordered<_>>();
+    let mut projects: Vec<ProjectData> = projects_fut.try_collect().await?;
+    projects.sort_by(|a, b| b.priority.cmp(&a.priority));
+    Ok(projects)
 }
 
 #[server]
@@ -137,6 +157,12 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
                     .collect::<Vec<_>>()
             });
 
+        let priority = doc
+            .get(&Yaml::from_str("priority"))
+            .map(|t| t.as_i64())
+            .flatten()
+            .unwrap_or_default();
+
         let html = markdown::to_html_with_options(
             &content,
             &Options {
@@ -165,6 +191,7 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
             play_store_url,
             backend_source,
             frontend_source,
+            priority,
         })
     } else {
         Err(ServerFnError::new("node not yaml"))

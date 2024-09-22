@@ -13,6 +13,9 @@ screenshots:
   - "/assets/images/projects/musicpiped/shot_05.png"
   - "/assets/images/projects/musicpiped/shot_06.png"
   - "/assets/images/projects/musicpiped/shot_07.png"
+
+priority: 50
+
 ---
 
 ## Overview
