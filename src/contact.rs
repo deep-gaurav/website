@@ -6,7 +6,7 @@ use crate::{footer::Footer, header::Header, icons::Icon, utils::title::SiteMeta}
 #[component]
 pub fn ContactPage() -> impl IntoView {
     view! {
-        <SiteMeta title="Contact" />
+        <SiteMeta title="Contact" description="Looking to partner or work together?" />
         <Header />
 
         <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">

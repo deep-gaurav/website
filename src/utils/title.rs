@@ -9,14 +9,18 @@ fn get_title(title: &str) -> String {
 #[component]
 pub fn SiteMeta(
     #[prop(into)] title: TextProp,
-    #[prop(optional)] description: Option<TextProp>,
+
+    #[prop(into)] description: TextProp,
     #[prop(optional)] gen_img: Option<bool>,
 ) -> impl IntoView {
     let location = use_location();
+    let desc = description.get().as_str().to_string();
+
     view! {
         <Title text=get_title(title.get().as_str()) />
         <Meta property="og:type" content="website" />
         <Meta property="og:title" content=get_title(title.get().as_str()) />
+        <Meta property="og:description" content={desc} />
         <Meta property="og:url" content=format!("https://deepgaurav.com{}", if location.pathname.get().starts_with("/"){
             location.pathname.get()
         }else{
@@ -41,15 +45,6 @@ pub fn SiteMeta(
                 Either::Right(())
             }
         }
-        {
-            if let Some(description) = description {
-                let desc = description.get().as_str().to_string();
-                Either::Left(view! {
-                    <Meta property="og:description" content={desc} />
-                })
-            }else{
-                Either::Right(())
-            }
-        }
+
     }
 }

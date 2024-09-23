@@ -17,7 +17,7 @@ pub fn HomePage() -> impl IntoView {
         |_| async move { list_projects().await.unwrap_or_default() },
     );
     view! {
-        <SiteMeta title="Home" />
+        <SiteMeta title="Home" description="I'm a software developer from India. I love solving problems that bring people a little closer." />
         <Header />
 
         <div id="og-image" class="min-h-svh w-full flex flex-col px-8 md:px-20">

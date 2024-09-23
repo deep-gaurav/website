@@ -34,7 +34,7 @@ pub fn ProjectsPage() -> impl IntoView {
     );
 
     view! {
-        <SiteMeta title="Projects" />
+        <SiteMeta title="Projects" description="From social apps to cloud solutions: a showcase of innovative projects solving real-world problems" />
         <Header />
 
         <div id="og-image" class=" w-full flex flex-col px-8 md:px-20">

@@ -8,7 +8,7 @@ use crate::{footer::Footer, header::Header, icons::Icon, utils::title::SiteMeta}
 #[component]
 pub fn AboutPage() -> impl IntoView {
     view! {
-        <SiteMeta title="About" />
+        <SiteMeta title="About" description="Tech enthusiast building connective solutions, one app at a time. Passionate about crafting innovative experiences that bring people closer together." />
         <Header />
 
         <div id="og-image" class="flex flex-col px-8 md:px-20">

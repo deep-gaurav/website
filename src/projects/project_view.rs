@@ -13,7 +13,7 @@ use super::ProjectData;
 #[component]
 pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl IntoView {
     view! {
-        <SiteMeta title={project.title.clone()} />
+        <SiteMeta title={project.title.clone()} description={project.tagline.clone()} />
         <Header />
 
         <div id="og-image" class="md:min-h-svh w-full flex flex-col px-8 md:px-20">
