@@ -39,7 +39,7 @@ pub fn SiteMeta(
             };
             if gen_img.unwrap_or(true) {
                 Either::Left(view! {
-                    <Meta property="og:image" content=format!("{}{}og_image.jpg", path,slash) />
+                    <Meta property="og:image" content=format!("https://deepgaurav.com{}{}og_image.jpg", path,slash) />
                 })
             }else{
                 Either::Right(())
