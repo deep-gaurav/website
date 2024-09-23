@@ -23,6 +23,14 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta name="theme-color" content="#1A1A1A" />
+
+                {
+                    leptos::tachys::html::element::link()
+                        .rel("preload")
+                        .href("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap")
+                        .r#as("style")
+                        .onload("this.onload=null;this.rel='stylesheet'")
+                }
                 <MetaTags/>
 
                 <AutoReload options=options.clone() />
