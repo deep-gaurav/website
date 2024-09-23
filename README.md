@@ -64,16 +64,24 @@ The projects page uses a custom CMS based on Markdown files. To add or edit proj
 
 1. Navigate to the `projects` directory
 2. Create a new Markdown file or edit an existing one
-3. Follow the established format for project entries
+3. Follow the established format for project entries using frontmatter
 
-Each Markdown file in this directory represents a project in your portfolio. Make sure to include relevant details such as:
+Each Markdown file in this directory represents a project in your portfolio. Metadata is provided using frontmatter at the beginning of each file.
 
-- Project title
-- Description
-- Technologies used
-- Your role
-- Key achievements
-- Links to live demo or GitHub repository (if applicable)
+### Project Metadata Structure
+
+| Frontmatter Key | Required | Description |
+|-----------------|----------|-------------|
+| title | Yes | The title of your project |
+| cover | Yes | Path or URL to the project's cover image |
+| tagline | Yes | A brief, catchy phrase describing the project |
+| short_description | Yes | A concise summary of the project (1-2 sentences) |
+| stack | No | Technologies used in the project |
+| web_url | No | URL to the live project (if applicable) |
+| play_store_url | No | URL to the Play Store listing (for Android apps) |
+| backend_source | No | URL to the backend source code repository |
+| frontend_source | No | URL to the frontend source code repository |
+
 
 ## Customization
 
