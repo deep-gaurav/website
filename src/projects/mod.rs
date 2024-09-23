@@ -218,41 +218,13 @@ pub fn ProjectPage() -> impl IntoView {
         |_| async move { list_projects().await.unwrap_or_default() },
     );
 
-    let post_view = move || {
-        Suspend::new(async move {
-            let projects = projects_resource.await;
-            match project_resource.await {
-                Ok(project) => Either::Left({
-                    view! {<ProjectView project projects />}
-                }),
-                Err(e) => Either::Right(view! {{e}}),
-            }
-        })
-    };
-
-    view! {
-        <Suspense fallback=move || view! { <p>"Loading post..."</p> }>
-            <ErrorBoundary fallback=|errors| {
-                #[cfg(feature = "ssr")]
-                expect_context::<leptos_axum::ResponseOptions>()
-                    .set_status(http::StatusCode::NOT_FOUND);
-                view! {
-                    <div class="error">
-                        <h1>"Something went wrong."</h1>
-                        <ul>
-
-                            {move || {
-                                errors
-                                    .get()
-                                    .into_iter()
-                                    .map(|(_, error)| view! { <li>{error.to_string()}</li> })
-                                    .collect::<Vec<_>>()
-                            }}
-
-                        </ul>
-                    </div>
-                }
-            }>{post_view}</ErrorBoundary>
-        </Suspense>
-    }
+    Suspend::new(async move {
+        let projects = projects_resource.await;
+        match project_resource.await {
+            Ok(project) => Either::Left({
+                view! {<ProjectView project projects />}
+            }),
+            Err(e) => Either::Right(view! {{e}}),
+        }
+    })
 }

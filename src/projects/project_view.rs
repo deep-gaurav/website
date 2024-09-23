@@ -24,7 +24,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
             <div class="h-8" />
             <h2 class="text-left text-xl text-slate-300" > {project.tagline} </h2>
             <div class="h-20" />
-            <Picture attr:class="rounded-lg w-full max-h-80 object-cover" src={project.cover_url} />
+            <Picture src={project.cover_url} attr:class="rounded-lg w-full max-h-80 object-cover"  />
             <div class="h-10" />
         </div>
         <div class="w-full flex flex-col px-8 md:px-20">
