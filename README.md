@@ -1,90 +1,88 @@
-<picture>
-    <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
-    <img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo">
-</picture>
+# Personal Portfolio Website
 
-# Leptos Axum Starter Template
+This repository contains my personal portfolio website as a software engineer. It's built with Leptos, a Rust web framework, using Server-Side Generation (SSG) and Tailwind CSS for styling. The website features a custom Content Management System (CMS) for the projects page, utilizing Markdown files.
 
-This is a template for use with the [Leptos](https://github.com/leptos-rs/leptos) web framework and the [cargo-leptos](https://github.com/akesson/cargo-leptos) tool using [Axum](https://github.com/tokio-rs/axum).
+**Live Website:** [https://deepgaurav.com/](https://deepgaurav.com/)
 
-## Creating your template repo
+## Features
 
-If you don't have `cargo-leptos` installed you can install it with
+- Built with Leptos Rust framework
+- Server-Side Generation (SSG) for improved performance
+- Tailwind CSS for responsive and customizable styling
+- Custom CMS for projects page using Markdown files
+- Showcase of my software engineering projects and skills
 
-```bash
-cargo install cargo-leptos --locked
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- [Rust](https://www.rust-lang.org/tools/install)
+- [cargo-leptos](https://github.com/leptos-rs/cargo-leptos)
+- wasm32-unknown-unknown target
+
+## Installation
+
+1. Clone this repository:
+   ```
+   git clone https://github.com/deep-gaurav/website.git
+   cd website
+   ```
+
+2. Install cargo-leptos:
+   ```
+   cargo install cargo-leptos
+   ```
+
+3. Add the wasm32-unknown-unknown target:
+   ```
+   rustup target add wasm32-unknown-unknown
+   ```
+
+## Running the Project
+
+To run the project in release mode and generate static files:
+
+```
+cargo leptos serve --release
 ```
 
-Then run
-```bash
-cargo leptos new --git https://github.com/leptos-rs/start-axum-0.7
-```
+This command will:
+1. Compile the Rust code
+2. Generate all static files in the `target/site` directory
+3. Serve the website using a built-in file server
 
-to generate a new project template.
 
-```bash
-cd website
-```
+## Deployment
 
-to go to your newly created project.  
-Feel free to explore the project structure, but the best place to start with your application code is in `src/app.rs`.  
-Addtionally, Cargo.toml may need updating as new versions of the dependencies are released, especially if things are not working after a `cargo update`.
+To deploy the website, you can use any static file hosting service. Simply upload the contents of the `target/site` directory to your hosting provider.
 
-## Running your project
+The live version of this portfolio is currently hosted at [https://deepgaurav.com/](https://deepgaurav.com/).
 
-```bash
-cargo leptos watch
-```
+## Project Showcase
 
-## Installing Additional Tools
+The projects page uses a custom CMS based on Markdown files. To add or edit projects:
 
-By default, `cargo-leptos` uses `nightly` Rust, `cargo-generate`, and `sass`. If you run into any trouble, you may need to install one or more of these tools.
+1. Navigate to the `projects` directory
+2. Create a new Markdown file or edit an existing one
+3. Follow the established format for project entries
 
-1. `rustup toolchain install nightly --allow-downgrade` - make sure you have Rust nightly
-2. `rustup target add wasm32-unknown-unknown` - add the ability to compile Rust to WebAssembly
-3. `cargo install cargo-generate` - install `cargo-generate` binary (should be installed automatically in future)
-4. `npm install -g sass` - install `dart-sass` (should be optional in future
+Each Markdown file in this directory represents a project in your portfolio. Make sure to include relevant details such as:
 
-## Compiling for Release
-```bash
-cargo leptos build --release
-```
+- Project title
+- Description
+- Technologies used
+- Your role
+- Key achievements
+- Links to live demo or GitHub repository (if applicable)
 
-Will generate your server binary in target/server/release and your site package in target/site
+## Customization
 
-## Testing Your Project
-```bash
-cargo leptos end-to-end
-```
+Feel free to customize the website to reflect your personal brand and showcase your unique skills and experiences. You can modify the Rust components, update the Tailwind CSS styles, or adjust the content structure as needed.
 
-```bash
-cargo leptos end-to-end --release
-```
+## Contributing
 
-Cargo-leptos uses Playwright as the end-to-end test tool.  
-Tests are located in end2end/tests directory.
+As this is a personal portfolio website, contributions are not expected. However, if you notice any issues or have suggestions, feel free to open an issue in the repository.
 
-## Executing a Server on a Remote Machine Without the Toolchain
-After running a `cargo leptos build --release` the minimum files needed are:
+## License
 
-1. The server binary located in `target/server/release`
-2. The `site` directory and all files within located in `target/site`
-
-Copy these files to your remote server. The directory structure should be:
-```text
-website
-site/
-```
-Set the following environment variables (updating for your project as needed):
-```text
-LEPTOS_OUTPUT_NAME="website"
-LEPTOS_SITE_ROOT="site"
-LEPTOS_SITE_PKG_DIR="pkg"
-LEPTOS_SITE_ADDR="127.0.0.1:3000"
-LEPTOS_RELOAD_PORT="3001"
-```
-Finally, run the server binary.
-
-## Licensing
-
-This template itself is released under the Unlicense. You should replace the LICENSE for your own application with an appropriate license if you plan to release it publicly.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
