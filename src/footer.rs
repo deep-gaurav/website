@@ -44,7 +44,7 @@ pub fn Footer() -> impl IntoView {
                 <div class="flex-grow" />
                 <div class="flex flex-col text-slate-300">
                     <div class="text-lg"> "©2024 All Rights Reserved." </div>
-                    <div class="text-base"> "Made with 💜 by Deep Gaurav" </div>
+                    <a href="https://github.com/deep-gaurav/website/" class="text-base flex gap-2 justify-center md:justify-end"> <Icon icon=crate::icons::Icons::Github /> "Website Source" </a>
                 </div>
             </div>
         </footer>
