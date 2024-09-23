@@ -91,6 +91,10 @@ Feel free to customize the website to reflect your personal brand and showcase y
 
 As this is a personal portfolio website, contributions are not expected. However, if you notice any issues or have suggestions, feel free to open an issue in the repository.
 
+## Acknowledgements
+
+Site design inspired by [purplefolio](https://dribbble.com/shots/23212629-Purplefolio-Framer-Portfolio-Website-For-Web-Developers) by [Luca Da Corte](https://dribbble.com/LucaDaCorte)
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
