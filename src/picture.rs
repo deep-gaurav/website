@@ -3,8 +3,9 @@ use leptos::{prelude::*, text_prop::TextProp};
 #[component]
 pub fn Picture(#[prop(into)] src: TextProp) -> impl IntoView {
     let src = src.get().as_str().to_string();
+    let srcc = src.clone();
     let srcset = Resource::new_blocking(
-        move || src.clone(),
+        move || srcc.clone(),
         |src| async move {
             #[cfg(feature = "ssr")]
             {
@@ -23,7 +24,7 @@ pub fn Picture(#[prop(into)] src: TextProp) -> impl IntoView {
             .unwrap_or((None, None, None, None));
         view! {
             <img
-                src
+                src={src}
                 srcset={srcset}
                 sizes={sizes}
                 height={height}
