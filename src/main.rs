@@ -1,17 +1,24 @@
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
-    use leptos::config::get_configuration;
-    use leptos_axum::generate_route_list_with_ssg;
+    use leptos::{config::get_configuration, prelude::provide_context};
+    use leptos_axum::generate_route_list_with_exclusions_and_ssg_and_context;
     use website::app::*;
 
     let conf = get_configuration(None).unwrap();
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
-    let (_, static_routes) = generate_route_list_with_ssg({
-        let leptos_options = leptos_options.clone();
-        move || shell(leptos_options.clone())
-    });
+    let lc = leptos_options.clone();
+    let (_, static_routes) = generate_route_list_with_exclusions_and_ssg_and_context(
+        {
+            let leptos_options = leptos_options.clone();
+            move || shell(leptos_options.clone())
+        },
+        None,
+        move || {
+            provide_context(lc.clone());
+        },
+    );
 
     static_routes.generate(&leptos_options).await;
 }

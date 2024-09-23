@@ -4,6 +4,7 @@ use crate::{
     footer::Footer,
     header::Header,
     icons::Icon,
+    picture::Picture,
     project::ProjectList,
     utils::{title::SiteMeta, Pairs},
 };
@@ -23,7 +24,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
             <div class="h-8" />
             <h2 class="text-left text-xl text-slate-300" > {project.tagline} </h2>
             <div class="h-20" />
-            <img class="rounded-lg w-full max-h-80 object-cover" src={project.cover_url} />
+            <Picture attr:class="rounded-lg w-full max-h-80 object-cover" src={project.cover_url} />
             <div class="h-10" />
         </div>
         <div class="w-full flex flex-col px-8 md:px-20">
@@ -152,7 +153,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                         <div class="flex gap-4 h-80 overflow-auto">
                             {
                                 project.screenshots.into_iter().map(|sc_url|view! {
-                                    <img loading="lazy" class="h-full rounded" src=sc_url />
+                                    <Picture attr:loading="lazy" attr:class="h-full rounded" src=sc_url />
                                 }).collect_view()
                             }
                         </div>

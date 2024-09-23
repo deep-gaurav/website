@@ -5,6 +5,7 @@ pub mod footer;
 pub mod header;
 pub mod home;
 pub mod icons;
+pub mod picture;
 pub mod project;
 pub mod projects;
 pub mod utils;

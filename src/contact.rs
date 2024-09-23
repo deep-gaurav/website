@@ -1,7 +1,9 @@
 use leptos::prelude::*;
 use leptos_router::components::A;
 
-use crate::{footer::Footer, header::Header, icons::Icon, utils::title::SiteMeta};
+use crate::{
+    footer::Footer, header::Header, icons::Icon, picture::Picture, utils::title::SiteMeta,
+};
 
 #[component]
 pub fn ContactPage() -> impl IntoView {
@@ -30,7 +32,7 @@ pub fn ContactPage() -> impl IntoView {
                 <div class="flex-grow" />
                 <div class="p-8 md:p-10 border border-solid border-accent rounded-full w-full md:w-[30%]">
                     <div class="rounded-full relative overflow-hidden w-full aspect-square">
-                        <img class="inline h-full w-full object-cover" src="/assets/images/deep.webp" />
+                        <Picture attr:class="inline h-full w-full object-cover" src="/assets/images/deep.webp" />
                     </div>
                 </div>
                 <div class="flex-grow md:flex-grow-0" />

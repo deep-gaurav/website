@@ -5,6 +5,7 @@ use crate::{
     about::MyStory,
     footer::Footer,
     header::{Header, MenuPage},
+    picture::Picture,
     project::ProjectList,
     projects::list_projects,
     utils::{title::SiteMeta, Pairs},
@@ -45,7 +46,9 @@ pub fn HomePage() -> impl IntoView {
                 <div class="flex-grow min-h-2 flex-shrink-0" />
                 <div class="p-8 md:p-10 border border-solid border-accent rounded-full w-full md:w-[30%]">
                     <div class="rounded-full relative overflow-hidden w-full aspect-square">
-                        <img class="inline h-full w-full object-cover" src="/assets/images/deep.webp" />
+                        <Picture src="/assets/images/deep.webp"
+                            attr:class="inline h-full w-full object-cover"
+                        />
                     </div>
                 </div>
                 <div class="flex-grow md:flex-grow-0" />
