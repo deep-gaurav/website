@@ -71,10 +71,12 @@ mod ssr {
             let name = format!("{name}-{size}.avif");
             let path = dir.join(name);
 
-            if Some(false) == tokio::fs::try_exists(&path).await.ok() {
-                if let Ok(_) = new_img.save_with_format(&path, image::ImageFormat::Avif) {
+            if let Some(exists) = tokio::fs::try_exists(&path).await.ok() {
+                if exists {
                     avif_sizes.push((*size, path));
-                };
+                } else if let Ok(_) = new_img.save_with_format(&path, image::ImageFormat::Avif) {
+                    avif_sizes.push((*size, path));
+                }
             }
         }
         avif_sizes.sort_by(|a, b| a.0.cmp(&b.0));
