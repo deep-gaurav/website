@@ -13,7 +13,7 @@ pub fn ProjectCard(project: ProjectData) -> impl IntoView {
     let url = project.url();
     view! {
         <a href=url class="flex flex-col hover:bg-white/10 transition-all duration-300">
-            <img class="rounded-xl h-80 w-full object-cover bg-white/10" src=project.cover_url />
+            <img class="rounded-xl max-h-80 w-full object-cover bg-white/10" src=project.cover_url />
             <div class="h-4" />
             <div class="flex">
                 <h3 class="text-left text-3xl font-semibold"> {project.title} </h3>
