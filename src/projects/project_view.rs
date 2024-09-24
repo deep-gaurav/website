@@ -42,7 +42,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                                             {
                                                 if let Some(play_store) = project.play_store_url {
                                                     Either::Left(view! {
-                                                        <a href=play_store class="font-semibold flex gap-2">
+                                                        <a aria-label="Play Store Link" href=play_store class="font-semibold flex gap-2">
                                                             <Icon icon=crate::icons::Icons::GooglePlay />
 
                                                             "Play Store"
@@ -55,7 +55,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                                             {
                                                 if let Some(web_url) = project.web_url {
                                                     Either::Left(view! {
-                                                        <a href=web_url class="font-semibold flex gap-2">
+                                                        <a aria-label="Website Link" href=web_url class="font-semibold flex gap-2">
                                                             <Icon icon=crate::icons::Icons::Web />
 
                                                             "Web"
@@ -83,7 +83,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                                             {
                                                 if let Some(source) = project.frontend_source.clone() {
                                                     Either::Left(view! {
-                                                        <a href=source class="font-semibold flex gap-2">
+                                                        <a aria-label="Backend Source Link" href=source class="font-semibold flex gap-2">
                                                             <Icon icon=crate::icons::Icons::Github />
 
                                                             {
@@ -102,7 +102,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                                             {
                                                 if let Some(source) = project.backend_source {
                                                     Either::Left(view! {
-                                                        <a href=source class="font-semibold flex gap-2">
+                                                        <a aria-label="Frontend Source Link" href=source class="font-semibold flex gap-2">
                                                             <Icon icon=crate::icons::Icons::Github />
 
                                                             {

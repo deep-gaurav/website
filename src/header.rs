@@ -20,6 +20,15 @@ impl MenuPage {
         }
     }
 
+    pub fn aria_label(&self) -> &str {
+        match self {
+            MenuPage::Home => "Go to Home Page",
+            MenuPage::Projects => "Find all of my Projects",
+            MenuPage::About => "Get to know more about me",
+            MenuPage::Contact => "Contact me",
+        }
+    }
+
     pub fn path(&self) -> &str {
         match self {
             MenuPage::Home => "/",
@@ -40,30 +49,30 @@ pub fn Header() -> impl IntoView {
         <div class="px-8 md:px-20">
 
             <nav class="justify-center gap-4 text-slate-300 font-semibold text-xl py-5 hidden md:flex items-center">
-                <a href={MenuPage::Home.path()}> <SiteIcon /> </a>
+                <a aria-label="Go to Home" href={MenuPage::Home.path()}> <SiteIcon /> </a>
                 <div class="flex-grow" />
                 {
                     desktop_pages.iter().map(|page| {
                         view! {
-                            <a href={page.path()}> <span class=("text-accent", move||location.pathname.get() == page.path())> {page.name()} </span> </a>
+                            <a aria-label={page.aria_label()} href={page.path()}> <span class=("text-accent", move||location.pathname.get() == page.path())> {page.name()} </span> </a>
                         }
                     }).collect_view()
                 }
                 <div class="flex-grow" />
 
-                <a href={MenuPage::Contact.path()}> <Icon icon=crate::icons::Icons::Chat /> </a>
+                <a aria-label={MenuPage::Contact.aria_label()} href={MenuPage::Contact.path()}> <Icon icon=crate::icons::Icons::Chat /> </a>
             </nav>
 
 
-            <MovileMenu>
+            <MobileMenu>
                 <SiteIcon />
-            </MovileMenu>
+            </MobileMenu>
         </div>
     }
 }
 
 #[island]
-fn MovileMenu(children: Children) -> impl IntoView {
+fn MobileMenu(children: Children) -> impl IntoView {
     let mobile_pages = &[
         MenuPage::Home,
         MenuPage::Projects,
@@ -79,9 +88,10 @@ fn MovileMenu(children: Children) -> impl IntoView {
     let (is_open, set_is_open) = signal(false);
     view! {
         <div class="flex py-6 md:hidden">
-            <a href={MenuPage::Home.path()}> {children()} </a>
+            <a aria-label={MenuPage::Home.aria_label()} href={MenuPage::Home.path()}> {children()} </a>
             <div class="flex-grow" />
             <button
+                aria-label="Mobile Menu"
                 on:click=move|_|{
                     set_is_open.set(!is_open.get_untracked());
                 }
@@ -107,7 +117,7 @@ fn MovileMenu(children: Children) -> impl IntoView {
             {
                 mobile_pages.iter().map(|page| {
                     view! {
-                        <a href={page.path()}> <span class=("text-accent", move||location.get() == page.path())> {page.name()} </span> </a>
+                        <a aria-label={page.aria_label()} href={page.path()}> <span class=("text-accent", move||location.get() == page.path())> {page.name()} </span> </a>
                     }
                 }).collect_view()
             }

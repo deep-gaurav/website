@@ -38,8 +38,8 @@ pub fn HomePage() -> impl IntoView {
                     <h2 class="text-left text-lg md:text-xl text-slate-300" > "I'm a software developer from India."<br/>"I love solving problems that bring people a little closer." </h2>
                     <div class="h-6" />
                     <div class="flex gap-4">
-                        <A href={MenuPage::Contact.path()} {..view! {< {..} class="p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}} > "Get In Touch" </A>
-                        <A href={MenuPage::Projects.path()} {..view! {< {..} class="p-2 px-4 border transition-colors border-white hover:bg-white hover:text-black rounded-md font-medium box-border" />}}> "Browse Projects" </A>
+                        <A attr:aria-label={MenuPage::Contact.aria_label()} href={MenuPage::Contact.path()} {..view! {< {..} class="p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}} > "Get In Touch" </A>
+                        <A attr:aria-label={MenuPage::Projects.aria_label()} href={MenuPage::Projects.path()} {..view! {< {..} class="p-2 px-4 border transition-colors border-white hover:bg-white hover:text-black rounded-md font-medium box-border" />}}> "Browse Projects" </A>
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@ pub fn HomePage() -> impl IntoView {
 
             <div class="text-2xl text-left text-slate-200 font-medium"> "Interested in more projects" <span class="text-accent"> "?" </span> </div>
             <div class="h-2" />
-            <A href={MenuPage::Projects.path()} {..view! {< {..} class="self-start p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}}> "View All Projects" </A>
+            <A attr:aria-label={MenuPage::Projects.aria_label()} href={MenuPage::Projects.path()} {..view! {< {..} class="self-start p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}}> "View All Projects" </A>
 
         </div>
 

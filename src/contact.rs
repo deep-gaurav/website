@@ -23,7 +23,10 @@ pub fn ContactPage() -> impl IntoView {
                     <div class="h-8" />
                     <h2 class="text-left text-xl text-slate-300" > "Looking to partner or work together?"<br/>"Reach out over my email and I'll get back to you in the next 48 hours." </h2>
                     <div class="h-6" />
-                    <A href="mailto:deepgauravraj@gmail.com" {..view! {< {..} class="text-slate-300 text-lg flex gap-4 items-center hover:text-accent" />}}>
+                    <A
+
+                        attr:aria-label="Email me"
+                        href="mailto:deepgauravraj@gmail.com" {..view! {< {..} class="text-slate-300 text-lg flex gap-4 items-center hover:text-accent" />}}>
                         <div class="p-2 rounded-full border-slate-400 border"> <Icon icon=crate::icons::Icons::Mail /> </div>
                         <div> "deepgauravraj@gmail.com" </div>
                     </A>
