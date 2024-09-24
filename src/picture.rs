@@ -1,7 +1,7 @@
 use leptos::{prelude::*, text_prop::TextProp};
 
 #[component]
-pub fn Picture(#[prop(into)] src: TextProp) -> impl IntoView {
+pub fn Picture(#[prop(into)] src: TextProp, #[prop(into)] alt: String) -> impl IntoView {
     let src = src.get().as_str().to_string();
     let srcc = src.clone();
     let srcset = Resource::new_blocking(
@@ -29,6 +29,7 @@ pub fn Picture(#[prop(into)] src: TextProp) -> impl IntoView {
                 sizes={sizes}
                 height={height}
                 width={width}
+                alt={alt}
             />
         }
     })

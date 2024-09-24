@@ -48,6 +48,7 @@ pub fn HomePage() -> impl IntoView {
                     <div class="rounded-full relative overflow-hidden w-full aspect-square">
                         <Picture src="/assets/images/deep.webp"
                             attr:class="inline h-full w-full object-cover"
+                            alt="Deep Gaurav, Profile Picture"
                         />
                     </div>
                 </div>

@@ -119,6 +119,6 @@ fn MovileMenu(children: Children) -> impl IntoView {
 #[component]
 fn SiteIcon() -> impl IntoView {
     view! {
-        <Picture attr:class="h-10 w-auto" src="/assets/images/icon.png" />
+        <Picture attr:class="h-10 w-auto" src="/assets/images/icon.png" alt="Site Icon" />
     }
 }

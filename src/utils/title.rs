@@ -18,6 +18,8 @@ pub fn SiteMeta(
 
     view! {
         <Title text=get_title(title.get().as_str()) />
+        <Meta name="description" content={desc.clone()} />
+
         <Meta property="og:type" content="website" />
         <Meta property="og:title" content=get_title(title.get().as_str()) />
         <Meta property="og:description" content={desc} />
