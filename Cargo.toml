@@ -35,7 +35,6 @@ yaml-rust2 = { version = "0.8" }
 anyhow = { version = "1" }
 serde = { version = "1", features = ["derive"] }
 futures = "0.3"
-image = { version = "0.25", optional = true }
 
 [features]
 csr = ["leptos/csr"]
@@ -52,7 +51,6 @@ ssr = [
     "leptos/experimental-islands",
     "dep:tracing",
     "dep:tokio-stream",
-    "dep:image",
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode
