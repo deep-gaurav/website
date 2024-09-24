@@ -80,7 +80,7 @@ pub mod ssr {
         let image = ImageReader::open(&path).ok()?.decode().ok()?;
         let width = image.width();
         let height = image.height();
-        let mut sizes = vec![480, 960, 1920];
+        let mut sizes = vec![320, 480, 960, 1920];
         sizes.retain(|size| size < &width);
 
         if width > sizes.last().cloned().unwrap_or_default() {
@@ -89,10 +89,14 @@ pub mod ssr {
 
         let mut avif_sizes = vec![];
         for size in sizes.iter() {
-            let (mut ext, mut format) = ("avif", image::ImageFormat::Avif);
+            let (ext, format);
             #[cfg(debug_assertions)]
             {
                 (ext, format) = ("png", image::ImageFormat::Png);
+            }
+            #[cfg(not(debug_assertions))]
+            {
+                (ext, format) = ("avif", image::ImageFormat::Avif);
             }
             let name = format!("{name}-{size}.{ext}");
             let path = dir.join(name);
