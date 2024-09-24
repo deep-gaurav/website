@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_router::hooks::use_location;
 
 use crate::{icons::Icon, picture::Picture};
 
@@ -29,9 +30,40 @@ impl MenuPage {
     }
 }
 
-#[island]
+#[component]
 pub fn Header() -> impl IntoView {
     let desktop_pages = &[MenuPage::Home, MenuPage::Projects, MenuPage::About];
+
+    let location = use_location();
+    view! {
+
+        <div class="px-8 md:px-20">
+
+            <nav class="justify-center gap-4 text-slate-300 font-semibold text-xl py-5 hidden md:flex items-center">
+                <a href={MenuPage::Home.path()}> <SiteIcon /> </a>
+                <div class="flex-grow" />
+                {
+                    desktop_pages.iter().map(|page| {
+                        view! {
+                            <a href={page.path()}> <span class=("text-accent", move||location.pathname.get() == page.path())> {page.name()} </span> </a>
+                        }
+                    }).collect_view()
+                }
+                <div class="flex-grow" />
+
+                <a href={MenuPage::Contact.path()}> <Icon icon=crate::icons::Icons::Chat /> </a>
+            </nav>
+
+
+            <MovileMenu>
+                <SiteIcon />
+            </MovileMenu>
+        </div>
+    }
+}
+
+#[island]
+fn MovileMenu(children: Children) -> impl IntoView {
     let mobile_pages = &[
         MenuPage::Home,
         MenuPage::Projects,
@@ -44,46 +76,10 @@ pub fn Header() -> impl IntoView {
         set_location.set(window().location().pathname().unwrap_or_default());
     });
 
-    let (is_mobile, set_is_mobile) = signal(false);
-    let handle_size_change = move || {
-        if let Ok(width) = window().inner_width() {
-            if let Some(width) = width.as_f64() {
-                let new_is_mobile = width < 768.0;
-                if is_mobile.get_untracked() != new_is_mobile {
-                    set_is_mobile.set(new_is_mobile)
-                }
-            }
-        }
-    };
-    Effect::new(move |_| {
-        handle_size_change();
-    });
-    let handle = window_event_listener(leptos::ev::resize, move |_| handle_size_change());
-    on_cleanup(move || handle.remove());
-
     let (is_open, set_is_open) = signal(false);
-
     view! {
-
-        <div class="px-8 md:px-20">
-
-        <nav class="justify-center gap-4 text-slate-300 font-semibold text-xl py-5 hidden md:flex items-center">
-            <a href={MenuPage::Home.path()}> <Picture attr:class="h-10 w-auto" src="/assets/images/icon.png" /> </a>
-            <div class="flex-grow" />
-            {
-                desktop_pages.iter().map(|page| {
-                    view! {
-                        <a href={page.path()}> <span class=("text-accent", move||location.get() == page.path())> {page.name()} </span> </a>
-                    }
-                }).collect_view()
-            }
-            <div class="flex-grow" />
-
-            <a href={MenuPage::Contact.path()}> <Icon icon=crate::icons::Icons::Chat /> </a>
-        </nav>
-
         <div class="flex py-6 md:hidden">
-            <a href={MenuPage::Home.path()}> <Picture attr:class="h-10 w-auto" src="/assets/images/icon.png" /> </a>
+            <a href={MenuPage::Home.path()}> {children()} </a>
             <div class="flex-grow" />
             <button
                 on:click=move|_|{
@@ -117,7 +113,12 @@ pub fn Header() -> impl IntoView {
             }
             <div class="h-8" />
         </nav>
+    }
+}
 
-        </div>
+#[component]
+fn SiteIcon() -> impl IntoView {
+    view! {
+        <Picture attr:class="h-10 w-auto" src="/assets/images/icon.png" />
     }
 }

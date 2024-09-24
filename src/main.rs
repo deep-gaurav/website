@@ -3,12 +3,13 @@
 async fn main() {
     use leptos::{config::get_configuration, prelude::provide_context};
     use leptos_axum::generate_route_list_with_exclusions_and_ssg_and_context;
-    use website::app::*;
+    use website::{app::*, picture::ssr::VariantLock};
 
     let conf = get_configuration(None).unwrap();
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
     let lc = leptos_options.clone();
+    let variant_lock = VariantLock::new();
     let (_, static_routes) = generate_route_list_with_exclusions_and_ssg_and_context(
         {
             let leptos_options = leptos_options.clone();
@@ -17,6 +18,7 @@ async fn main() {
         None,
         move || {
             provide_context(lc.clone());
+            provide_context(variant_lock.clone());
         },
     );
 

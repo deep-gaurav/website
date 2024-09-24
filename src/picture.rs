@@ -35,14 +35,34 @@ pub fn Picture(#[prop(into)] src: TextProp) -> impl IntoView {
 }
 
 #[cfg(feature = "ssr")]
-mod ssr {
-    use std::path::PathBuf;
+pub mod ssr {
+
+    use std::{
+        collections::HashSet,
+        path::PathBuf,
+        sync::{Arc, Mutex},
+    };
 
     use image::{imageops::FilterType::Lanczos3, ImageReader};
     use leptos::{config::LeptosOptions, prelude::expect_context};
 
+    #[derive(Clone)]
+    pub struct VariantLock {
+        paths: Arc<Mutex<HashSet<PathBuf>>>,
+    }
+
+    impl VariantLock {
+        pub fn new() -> VariantLock {
+            Self {
+                paths: Arc::new(Mutex::new(HashSet::new())),
+            }
+        }
+    }
+
     pub async fn make_variants(url: &str) -> Option<(String, String, (u32, u32))> {
+        println!("Make variants for {url}");
         let options = expect_context::<LeptosOptions>();
+        let variantlock = expect_context::<VariantLock>();
         let path = PathBuf::from(&options.site_root).join(url.strip_prefix("/")?);
         let name = if let Some(extension) = path.extension() {
             path.file_name()?
@@ -64,25 +84,47 @@ mod ssr {
 
         let mut avif_sizes = vec![];
         for size in sizes.iter() {
+            let (mut ext, mut format) = ("avif", image::ImageFormat::Avif);
+            #[cfg(debug_assertions)]
+            {
+                (ext, format) = ("png", image::ImageFormat::Png);
+            }
+            let name = format!("{name}-{size}.{ext}");
+            let path = dir.join(name);
+
+            if let Ok(mut variants) = variantlock.paths.lock() {
+                if variants.contains(&path) {
+                    avif_sizes.push((*size, path));
+                    continue;
+                } else {
+                    variants.insert(path.clone());
+                }
+            } else {
+                continue;
+            }
             let img = image.clone();
 
             let new_h = ((*size as f64) / (width as f64)) * (height as f64);
             let new_img = img.resize_exact(*size, new_h as u32, Lanczos3);
 
-            let (mut ext, mut format) = ("avif", image::ImageFormat::Avif);
-            #[cfg(debug_assertions)]
-            {
-                (ext, format) = ("jpg", image::ImageFormat::Jpeg);
-            }
-            let name = format!("{name}-{size}.{ext}");
-            let path = dir.join(name);
-
             if let Some(exists) = tokio::fs::try_exists(&path).await.ok() {
+                let p2 = path.clone();
                 if exists {
+                    println!("Skip bcz exists {path:?}");
                     avif_sizes.push((*size, path));
-                } else if let Ok(_) = new_img.save_with_format(&path, format) {
-                    avif_sizes.push((*size, path));
+                } else if let Ok(data) = tokio::task::spawn_blocking(move || async move {
+                    new_img.save_with_format(&path, format)
+                })
+                .await
+                {
+                    println!("writing to New w: {size} h {new_h} {p2:?}");
+                    if let Ok(_) = data.await {
+                        println!("written to New w: {size} h {new_h} {p2:?}");
+                        avif_sizes.push((*size, p2));
+                    }
                 }
+            } else {
+                println!("Skip bcz error {path:?}");
             }
         }
         avif_sizes.sort_by(|a, b| a.0.cmp(&b.0));
