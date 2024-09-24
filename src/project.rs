@@ -10,11 +10,19 @@ use crate::{
 };
 
 #[component]
-pub fn ProjectCard(project: ProjectData) -> impl IntoView {
+pub fn ProjectCard(project: ProjectData, #[prop(optional)] lazy: bool) -> impl IntoView {
     let url = project.url();
     view! {
         <a aria-label=format!("View Project {}", project.title) href=url class="flex flex-col hover:bg-white/10 transition-all duration-300">
-            <Picture attr:class="rounded-xl max-h-80 w-full object-cover bg-white/10" src=project.cover_url alt=format!("{} cover image", project.title) />
+            <Picture attr:class="rounded-xl max-h-80 w-full object-cover bg-white/10" src=project.cover_url alt=format!("{} cover image", project.title)
+                attr:loading={
+                    if lazy {
+                        Some("lazy")
+                    }else{
+                        None
+                    }
+                }
+            />
             <div class="h-4" />
             <div class="flex">
                 <h3 class="text-left text-3xl font-semibold"> {project.title.clone()} </h3>
@@ -56,7 +64,10 @@ pub fn ProjectsPage() -> impl IntoView {
                             let project_pairs = Pairs::new(projects.into_iter());
 
                             view! {
-                                <ProjectList project_pairs />
+                                <ProjectList project_pairs
+                                    is_first_lazy=false
+                                    is_rest_lazy=true
+                                 />
                             }
 
                         }
@@ -74,6 +85,8 @@ pub fn ProjectsPage() -> impl IntoView {
 pub fn ProjectList<I>(
     project_pairs: Pairs<I>,
     #[prop(optional)] is_staggered: Option<bool>,
+    #[prop(optional)] is_first_lazy: bool,
+    #[prop(optional)] is_rest_lazy: bool,
 ) -> impl IntoView
 where
     I: Iterator<Item = ProjectData> + ExactSizeIterator,
@@ -102,7 +115,15 @@ where
                     <div
                         style=style1
                     >
-                        <ProjectCard project=project1 />
+                        <ProjectCard project=project1
+                            lazy={
+                                if index ==0 {
+                                    is_first_lazy
+                                }else{
+                                    is_rest_lazy
+                                }
+                            }
+                        />
                     </div>
                     {
                         if let Some(project2) = project2 {
@@ -110,7 +131,7 @@ where
                                 <div
                                     style=style2
                                 >
-                                    <ProjectCard project=project2 />
+                                    <ProjectCard project=project2 lazy={is_rest_lazy} />
                                 </div>
                             })
                         }else{

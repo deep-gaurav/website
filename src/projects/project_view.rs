@@ -183,7 +183,10 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                                 <h2 class="text-5xl md:text-5xl font-bold text-left"> "More Projects" <span class="text-accent"> "." </span> </h2>
 
                                 <div class="h-4" />
-                                <ProjectList project_pairs is_staggered=false />
+                                <ProjectList project_pairs is_staggered=false
+                                    is_first_lazy=true
+                                    is_rest_lazy=true
+                                />
                             }
                         )
                     }else{

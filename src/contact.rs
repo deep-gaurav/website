@@ -35,7 +35,10 @@ pub fn ContactPage() -> impl IntoView {
                 <div class="flex-grow" />
                 <div class="p-8 md:p-10 border border-solid border-accent rounded-full w-full md:w-[30%]">
                     <div class="rounded-full relative overflow-hidden w-full aspect-square">
-                        <Picture attr:class="inline h-full w-full object-cover" src="/assets/images/deep.webp" alt="Deep Gaurav, Profile Picture" />
+                        <Picture
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            attr:class="inline h-full w-full object-cover" src="/assets/images/deep.webp"
+                            alt="Deep Gaurav, Profile Picture" />
                     </div>
                 </div>
                 <div class="flex-grow md:flex-grow-0" />

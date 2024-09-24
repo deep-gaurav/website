@@ -49,6 +49,7 @@ pub fn HomePage() -> impl IntoView {
                         <Picture src="/assets/images/deep.webp"
                             attr:class="inline h-full w-full object-cover"
                             alt="Deep Gaurav, Profile Picture"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                     </div>
                 </div>
@@ -67,7 +68,10 @@ pub fn HomePage() -> impl IntoView {
                         let project_pairs = Pairs::new(projects.into_iter().take(3));
 
                         view! {
-                            <ProjectList project_pairs />
+                            <ProjectList project_pairs
+                                is_first_lazy=true
+                                is_rest_lazy=true
+                            />
                         }
 
                     }
