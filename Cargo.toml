@@ -13,12 +13,12 @@ path = "src/main.rs"
 [dependencies]
 axum = { version = "0.7", optional = true }
 console_error_panic_hook = "0.1"
-leptos = { git = "https://github.com/leptos-rs/leptos" }
+leptos = { git = "https://github.com/leptos-rs/leptos", rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
 leptos_axum = { git = "https://github.com/leptos-rs/leptos", features = [
     "islands-router",
-], optional = true }
-leptos_meta = { git = "https://github.com/leptos-rs/leptos" }
-leptos_router = { git = "https://github.com/leptos-rs/leptos" }
+], optional = true, rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
+leptos_meta = { git = "https://github.com/leptos-rs/leptos", rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
+leptos_router = { git = "https://github.com/leptos-rs/leptos", rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
 tokio = { version = "1", features = [
     "rt-multi-thread",
     "macros",
@@ -35,6 +35,10 @@ yaml-rust2 = { version = "0.8" }
 anyhow = { version = "1" }
 serde = { version = "1", features = ["derive"] }
 futures = "0.3"
+uuid = { version = "1", features = ["v4"], optional = true }
+image = { version = "0.25", optional = true }
+
+cfg-if = "1.0.0"
 
 [features]
 csr = ["leptos/csr"]
@@ -51,6 +55,8 @@ ssr = [
     "leptos/experimental-islands",
     "dep:tracing",
     "dep:tokio-stream",
+    "dep:uuid",
+    "dep:image",
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode
@@ -67,9 +73,6 @@ opt-level = 0
 
 [profile.bindev]
 inherits = "dev"
-
-[profile.dev.package.image]
-opt-level = 3
 
 [package.metadata.leptos]
 
