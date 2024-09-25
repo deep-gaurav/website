@@ -11,7 +11,11 @@ async fn main() {
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
     let lc = leptos_options.clone();
-    let variant_lock = VariantLock::new(PathBuf::from("target").join("images"));
+    let target_folder = PathBuf::from(&lc.site_root)
+        .parent()
+        .unwrap()
+        .join("images");
+    let variant_lock = VariantLock::new(target_folder);
     let _ = tokio::fs::create_dir_all(&variant_lock.cache_folder_path).await;
     println!("Generate routes");
     let (_, static_routes) = generate_route_list_with_exclusions_and_ssg_and_context(

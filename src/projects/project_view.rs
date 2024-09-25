@@ -153,7 +153,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                         <div class="flex gap-4 h-80 overflow-auto">
                             {
                                 project.screenshots.into_iter().enumerate().map(|(i,sc_url)|view! {
-                                    <Picture attr:loading="lazy" attr:class="h-full rounded" src=sc_url alt=format!("{} Screenshot {i}", project.title) />
+                                    <Picture sizes="auto 20rem" attr:loading="lazy" attr:class="h-full rounded w-fit min-w-fit" src=sc_url alt=format!("{} Screenshot {i}", project.title) />
                                 }).collect_view()
                             }
                         </div>
