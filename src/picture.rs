@@ -92,7 +92,7 @@ pub mod ssr {
         let image = ImageReader::open(&path).ok()?.decode().ok()?;
         let width = image.width();
         let height = image.height();
-        let mut sizes = vec![240, 320, 480, 960, 1080, 1440, 1620, 1920];
+        let mut sizes = vec![240, 320, 480, 720, 960, 1080, 1440, 1620, 1920];
         sizes.retain(|size| size < &width);
 
         if width > sizes.last().cloned().unwrap_or_default() {
