@@ -24,6 +24,9 @@ jobs:
       # before the plugin, as the cache uses the current rustc version as its cache key
       - run: rustup toolchain install nightly-2024-09-19 --profile minimal
 
+      - name: Install chrome
+        uses: browser-actions/setup-chrome@v1
+
       - run: rustup target add wasm32-unknown-unknown
 
       - uses: Swatinem/rust-cache@v2
