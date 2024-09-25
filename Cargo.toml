@@ -15,7 +15,7 @@ axum = { version = "0.7", optional = true }
 console_error_panic_hook = "0.1"
 leptos = { git = "https://github.com/leptos-rs/leptos", rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
 leptos_axum = { git = "https://github.com/leptos-rs/leptos", features = [
-    "islands-router",
+    # "islands-router",
 ], optional = true, rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
 leptos_meta = { git = "https://github.com/leptos-rs/leptos", rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
 leptos_router = { git = "https://github.com/leptos-rs/leptos", rev = "2b04c2710d913516dfda76b7dcb8992a715f9046" }
