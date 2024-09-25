@@ -13,11 +13,11 @@ pub fn Picture(
         |src| async move {
             #[cfg(feature = "ssr")]
             {
-                return ssr::make_variants(&src).await;
+                ssr::make_variants(&src).await
             }
             #[cfg(not(feature = "ssr"))]
             {
-                return Option::<(String, String, (u32, u32))>::None;
+                Option::<(String, String, (u32, u32))>::None
             }
         },
     );
@@ -50,7 +50,6 @@ pub mod ssr {
 
     use image::{imageops::FilterType::Lanczos3, ImageReader};
     use leptos::{config::LeptosOptions, prelude::expect_context};
-    use serde::{Deserialize, Serialize};
     use sha2::{Digest, Sha256};
     use tokio::io::{AsyncReadExt, BufReader};
 
@@ -125,11 +124,11 @@ pub mod ssr {
             } else {
                 continue;
             }
-            if Some(true) == tokio::fs::try_exists(&cache_path).await.ok() {
-                if let Ok(_) = tokio::fs::copy(&cache_path, &path).await {
-                    avif_sizes.push((*size, path));
-                    continue;
-                }
+            if Some(true) == tokio::fs::try_exists(&cache_path).await.ok()
+                && tokio::fs::copy(&cache_path, &path).await.is_ok()
+            {
+                avif_sizes.push((*size, path));
+                continue;
             }
 
             let img = image.clone();
@@ -137,7 +136,7 @@ pub mod ssr {
             let new_h = ((*size as f64) / (width as f64)) * (height as f64);
             let new_img = img.resize_exact(*size, new_h as u32, Lanczos3);
 
-            if let Some(exists) = tokio::fs::try_exists(&path).await.ok() {
+            if let Ok(exists) = tokio::fs::try_exists(&path).await {
                 let p2 = path.clone();
                 if exists {
                     println!("Skip bcz exists {path:?}");
@@ -148,7 +147,7 @@ pub mod ssr {
                 .await
                 {
                     println!("writing to New w: {size} h {new_h} {p2:?}");
-                    if let Ok(_) = data.await {
+                    if data.await.is_ok() {
                         println!("written to New w: {size} h {new_h} {p2:?}");
                         let _ = tokio::fs::copy(&p2, &cache_path).await;
                         avif_sizes.push((*size, p2));

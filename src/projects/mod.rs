@@ -69,7 +69,7 @@ pub async fn list_projects() -> Result<Vec<ProjectData>, ServerFnError> {
     let slugs = list_project_slugs().await?;
     let projects_fut = slugs
         .into_iter()
-        .map(|slug| get_project(slug))
+        .map(get_project)
         .collect::<FuturesUnordered<_>>();
     let mut projects: Vec<ProjectData> = projects_fut.try_collect().await?;
     projects.sort_by(|a, b| b.priority.cmp(&a.priority));
@@ -93,14 +93,13 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
 
     let yaml = md
         .children()
-        .map(|c| c.iter().find(|p| matches!(p, Node::Yaml(..))))
-        .flatten()
+        .and_then(|c| c.iter().find(|p| matches!(p, Node::Yaml(..))))
         .ok_or(ServerFnError::new("cant find yaml"))?;
     if let Node::Yaml(yaml) = yaml {
         let docs = YamlLoader::load_from_str(&yaml.value)
             .map_err(|_| ServerFnError::new("yaml parse failed"))?;
         let doc = docs
-            .get(0)
+            .first()
             .and_then(|d| d.as_hash())
             .ok_or(ServerFnError::new("No doc in yaml or not hash"))?;
         let title = doc
@@ -123,33 +122,27 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
 
         let stack = doc
             .get(&Yaml::from_str("stack"))
-            .map(|t| t.as_str())
-            .flatten()
+            .and_then(|t| t.as_str())
             .map(|t| t.to_string());
         let web_url = doc
             .get(&Yaml::from_str("web_url"))
-            .map(|t| t.as_str())
-            .flatten()
+            .and_then(|t| t.as_str())
             .map(|t| t.to_string());
         let play_store_url = doc
             .get(&Yaml::from_str("play_store_url"))
-            .map(|t| t.as_str())
-            .flatten()
+            .and_then(|t| t.as_str())
             .map(|t| t.to_string());
         let backend_source = doc
             .get(&Yaml::from_str("backend_source"))
-            .map(|t| t.as_str())
-            .flatten()
+            .and_then(|t| t.as_str())
             .map(|t| t.to_string());
         let frontend_source = doc
             .get(&Yaml::from_str("frontend_source"))
-            .map(|t| t.as_str())
-            .flatten()
+            .and_then(|t| t.as_str())
             .map(|t| t.to_string());
         let screenshots = doc
             .get(&Yaml::from_str("screenshots"))
-            .map(|t| t.as_vec())
-            .flatten()
+            .and_then(|t| t.as_vec())
             .map(|t| {
                 t.clone()
                     .into_iter()
@@ -159,8 +152,7 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
 
         let priority = doc
             .get(&Yaml::from_str("priority"))
-            .map(|t| t.as_i64())
-            .flatten()
+            .and_then(|t| t.as_i64())
             .unwrap_or_default();
 
         let html = markdown::to_html_with_options(
@@ -181,7 +173,7 @@ pub async fn get_project(slug: String) -> Result<ProjectData, ServerFnError> {
             title: title.to_string(),
             cover_url: cover_url.to_string(),
             short_description: short_description.to_string(),
-            slug: slug,
+            slug,
             tagline: tagline.to_string(),
             screenshots: screenshots.unwrap_or_default(),
             html,

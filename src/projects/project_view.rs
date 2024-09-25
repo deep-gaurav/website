@@ -167,7 +167,7 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                 if let Some(index) = index {
                     let len = projects.len();
                     let mut circulariter = projects.into_iter().cycle();
-                    let adjusted_index = if index <= 0 {
+                    let adjusted_index = if index == 0 {
                         len + index
                     } else {
                         index
