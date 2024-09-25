@@ -44,22 +44,27 @@ pub mod ssr {
 
     use std::{
         collections::HashSet,
-        path::PathBuf,
+        path::{Path, PathBuf},
         sync::{Arc, Mutex},
     };
 
     use image::{imageops::FilterType::Lanczos3, ImageReader};
     use leptos::{config::LeptosOptions, prelude::expect_context};
+    use serde::{Deserialize, Serialize};
+    use sha2::{Digest, Sha256};
+    use tokio::io::{AsyncReadExt, BufReader};
 
     #[derive(Clone)]
     pub struct VariantLock {
         paths: Arc<Mutex<HashSet<PathBuf>>>,
+        pub cache_folder_path: PathBuf,
     }
 
     impl VariantLock {
-        pub fn new() -> VariantLock {
+        pub fn new(cache_folder: PathBuf) -> VariantLock {
             Self {
                 paths: Arc::new(Mutex::new(HashSet::new())),
+                cache_folder_path: cache_folder,
             }
         }
     }
@@ -77,6 +82,14 @@ pub mod ssr {
             path.file_name()?.to_str()?
         };
         let dir = path.parent()?;
+        println!("Generate hash");
+        let img_hash = generate_file_hash(&path).await.ok()?;
+        println!("Got hash {img_hash}");
+        let cache_dir = variantlock
+            .cache_folder_path
+            .join(format!("{name}-{img_hash}"));
+        tokio::fs::create_dir_all(&cache_dir).await.ok()?;
+
         let image = ImageReader::open(&path).ok()?.decode().ok()?;
         let width = image.width();
         let height = image.height();
@@ -99,7 +112,8 @@ pub mod ssr {
                 (ext, format) = ("avif", image::ImageFormat::Avif);
             }
             let name = format!("{name}-{size}.{ext}");
-            let path = dir.join(name);
+            let path = dir.join(&name);
+            let cache_path = cache_dir.join(&name);
 
             if let Ok(mut variants) = variantlock.paths.lock() {
                 if variants.contains(&path) {
@@ -111,6 +125,13 @@ pub mod ssr {
             } else {
                 continue;
             }
+            if Some(true) == tokio::fs::try_exists(&cache_path).await.ok() {
+                if let Ok(_) = tokio::fs::copy(&cache_path, &path).await {
+                    avif_sizes.push((*size, path));
+                    continue;
+                }
+            }
+
             let img = image.clone();
 
             let new_h = ((*size as f64) / (width as f64)) * (height as f64);
@@ -129,6 +150,7 @@ pub mod ssr {
                     println!("writing to New w: {size} h {new_h} {p2:?}");
                     if let Ok(_) = data.await {
                         println!("written to New w: {size} h {new_h} {p2:?}");
+                        let _ = tokio::fs::copy(&p2, &cache_path).await;
                         avif_sizes.push((*size, p2));
                     }
                 }
@@ -163,5 +185,23 @@ pub mod ssr {
             .join(", ");
 
         Some((srcs, sizes_st, (width, height)))
+    }
+
+    async fn generate_file_hash(file_path: &Path) -> std::io::Result<String> {
+        let file = tokio::fs::File::open(file_path).await?;
+        let mut reader = BufReader::new(file);
+        let mut hasher = Sha256::new();
+
+        let mut buffer = [0; 1024 * 1024]; // 1MB buffer
+        loop {
+            let count = reader.read(&mut buffer).await?;
+            if count == 0 {
+                break;
+            }
+            hasher.update(&buffer[..count]);
+        }
+
+        let hash = hasher.finalize();
+        Ok(hex::encode(hash))
     }
 }
