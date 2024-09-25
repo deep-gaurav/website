@@ -41,10 +41,11 @@ jobs:
         run: leptos_sitemap --dir "./target/site" --host "https://deepgaurav.com/"
         
       - name: Upload artifact
-        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
+        uses: actions/upload-artifact@v4
         with:
           name: website__prod
           path: target/site
+          retention-days: 1
 
   publish:
     name: Deploy to Cloudflare Pages
@@ -75,7 +76,7 @@ jobs:
           mode: recreate
 
       - name: Download workflow artifact
-        uses: dawidd6/action-download-artifact@09f2f74827fd3a8607589e5ad7f9398816f540fe # v3.1.4
+        uses: actions/download-artifact@v4
         with:
           name: website__prod
           path: dist
