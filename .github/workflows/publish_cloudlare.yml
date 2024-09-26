@@ -92,7 +92,7 @@ jobs:
       - run: pwd
 
       - name: Generate SSG
-        run: ./website
+        run: ./websitebin
           
       - name: Upload artifact
         uses: actions/upload-artifact@v4
