@@ -40,12 +40,6 @@ jobs:
           name: website__prod
           path: target/site
           retention-days: 1
-      - name: Upload Cargo.toml 
-        uses: actions/upload-artifact@v4
-        with:
-          name: website__prod_cargo.toml
-          path: Cargo.toml
-          retention-days: 1
       - name: Upload websitebin 
         uses: actions/upload-artifact@v4
         with:
@@ -64,6 +58,8 @@ jobs:
       deployments: write  
     
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download workflow artifact
         uses: actions/download-artifact@v4
         with:
@@ -77,10 +73,6 @@ jobs:
           path: target/images
           key: images
 
-      - name: Download Cargo.toml
-        uses: actions/download-artifact@v4
-        with:
-          name: website__prod_cargo.toml
       - name: Download websitebin
         uses: actions/download-artifact@v4
         with:
