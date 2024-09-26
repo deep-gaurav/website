@@ -90,6 +90,7 @@ jobs:
       - run: ls -l target
       - run: ls -l target/site
       - run: pwd
+      - run: chmod +x websitebin
 
       - name: Generate SSG
         run: ./websitebin
