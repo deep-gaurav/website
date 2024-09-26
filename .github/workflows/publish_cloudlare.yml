@@ -81,14 +81,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: website__prod_cargo.toml
-          path: Cargo.toml
       - name: Download websitebin
         uses: actions/download-artifact@v4
         with:
           name: website__prod_website_bin
-          path: website
 
       - run: ls -l 
+      - run: ls -l target
+      - run: ls -l target/site
       - run: pwd
 
       - name: Generate SSG
