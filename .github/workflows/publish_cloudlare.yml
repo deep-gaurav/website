@@ -50,12 +50,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: website__prod_website_bin
-          path: target/release/webstie
+          path: target/release/websitebin
           retention-days: 1
 
 
   generate_ssg:
-    name: Generate sitemap and previews
+    name: Generate SSG
     runs-on: ubuntu-latest
     needs:
       - run-build-prod
@@ -69,7 +69,7 @@ jobs:
         with:
           name: website__prod
           path: target/site
-          
+
       - name: Cache Images
         id: cache-images
         uses: actions/cache@v4
@@ -80,7 +80,7 @@ jobs:
       - name: Download Cargo.toml
         uses: actions/download-artifact@v4
         with:
-          name: website__prod_cargo
+          name: website__prod_cargo.toml
           path: Cargo.toml
       - name: Download websitebin
         uses: actions/download-artifact@v4
