@@ -88,6 +88,9 @@ jobs:
           name: website__prod_website_bin
           path: website
 
+      - run: ls -l 
+      - run: pwd
+
       - name: Generate SSG
         run: ./website
           
