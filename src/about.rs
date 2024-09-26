@@ -13,32 +13,32 @@ pub fn AboutPage() -> impl IntoView {
 
         <div id="og-image" class="flex flex-col px-8 md:px-20">
 
-            <div class="h-20" />
+            <div class="h-20 flex-shrink-0" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> "About me"<span class="text-accent">"."</span></h1>
-            <div class="h-8" />
+            <div class="h-8 flex-shrink-0" />
             <h2 class="text-left text-xl text-slate-300" > "Tech enthusiast building connective solutions, one app at a time. Passionate about crafting innovative experiences that bring people closer together." </h2>
-            <div class="h-10" />
+            <div class="h-10 flex-shrink-0" />
             <div class="flex gap-10 items-stretch flex-col md:flex-row">
                 <div class="flex flex-col flex-shrink-0 flex-grow-[1]  basis-0 relative w-full md:w-1">
                     <h3 class="text-2xl font-semibold text-left"> "My Stack" </h3>
-                    <div class="h-4" />
+                    <div class="h-4 flex-shrink-0" />
                     <TechStack />
                 </div>
                 <div class="flex flex-col flex-shrink-0 flex-grow-[2] basis-0 relative w-full md:w-1">
                     <h3 class="text-2xl font-semibold text-left"> "My Place" </h3>
-                    <div class="h-4" />
+                    <div class="h-4 flex-shrink-0" />
                     <Location />
                 </div>
             </div>
         </div>
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
         <MyStory />
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
         <MyExperience />
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
 
         <Footer />
     }
@@ -120,7 +120,7 @@ pub fn MyStory() -> impl IntoView {
     view! {
         <div class="px-8 md:px-20 flex flex-col">
             <h2 class="text-5xl font-semibold text-left"> "My Story" <span class="text-accent"> "." </span> </h2>
-            <div class="h-6" />
+            <div class="h-6 flex-shrink-0" />
 
             <p class="text-left text-slate-300 text-lg whitespace-pre-line">
                 r#"From a young age, I was drawn to computers, experimenting with technology even before we had a TV at home. I started building games with no-code engines, eventually learning to code. After pursuing a degree in computer science at Delhi University, I quickly picked up new technologies like Flutter and developed my first app, MusicPiped, which gained traction in the open-source community.
@@ -166,7 +166,7 @@ Since joining in August 2023, I've developed a web app version, significantly im
     view! {
         <div class="px-8 md:px-20 flex flex-col">
             <h2 class="text-5xl font-semibold text-left"> "My Experience" <span class="text-accent"> "." </span> </h2>
-            <div class="h-10" />
+            <div class="h-10 flex-shrink-0" />
 
             {
                 EXPERIENCES.iter().enumerate().map(|(index,experience)|{
@@ -180,14 +180,14 @@ Since joining in August 2023, I've developed a web app version, significantly im
                                         <div class="font-bold text-2xl md:hidden text-left"> {experience.company.as_ref()} </div>
                                     </div>
                                 </div>
-                                <div class="h-2" />
+                                <div class="h-2 flex-shrink-0" />
                                 <div class="text-left flex flex-col">
                                     <div class="text-accent hidden md:block"> {experience.designation.as_ref()} </div>
                                     <div class="font-bold text-2xl hidden md:block"> {experience.company.as_ref()} </div>
                                     <div class="text-slate-300 w-full whitespace-break-spaces"> {experience.content.as_ref()} </div>
                                 </div>
                             </div>
-                            <div class="h-12" />
+                            <div class="h-12 flex-shrink-0" />
                         </div>
                     }
                 }).collect_view()

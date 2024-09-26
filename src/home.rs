@@ -28,15 +28,15 @@ pub fn HomePage() -> impl IntoView {
                     <div class="text-slate-300 text-lg text-left">
                         "Hi, I'm Deep 👋"
                     </div>
-                    <div class="h-6" />
+                    <div class="h-6 flex-shrink-0" />
                     <h1 class="text-5xl md:text-7xl font-bold text-left ">
                         <span class="text-accent"> "Software" </span>
                         <br/>
                         "Developer"
                     </h1>
-                    <div class="h-8" />
+                    <div class="h-8 flex-shrink-0" />
                     <h2 class="text-left text-lg md:text-xl text-slate-300" > "I'm a software developer from India."<br/>"I love solving problems that bring people a little closer." </h2>
-                    <div class="h-6" />
+                    <div class="h-6 flex-shrink-0" />
                     <div class="flex gap-4">
                         <A attr:aria-label={MenuPage::Contact.aria_label()} href={MenuPage::Contact.path()} {..view! {< {..} class="p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}} > "Get In Touch" </A>
                         <A attr:aria-label={MenuPage::Projects.aria_label()} href={MenuPage::Projects.path()} {..view! {< {..} class="p-2 px-4 border transition-colors border-white hover:bg-white hover:text-black rounded-md font-medium box-border" />}}> "Browse Projects" </A>
@@ -58,7 +58,7 @@ pub fn HomePage() -> impl IntoView {
         </div>
         <div class="px-8 md:px-20 flex flex-col">
             <h2 class="text-5xl font-semibold text-left"> "Projects" <span class="text-accent"> "." </span> </h2>
-            <div class="h-6" />
+            <div class="h-6 flex-shrink-0" />
 
             <div class="flex flex-col gap-10">
             {
@@ -78,19 +78,19 @@ pub fn HomePage() -> impl IntoView {
                 )
             }
             </div>
-            <div class="h-8" />
+            <div class="h-8 flex-shrink-0" />
 
             <div class="text-2xl text-left text-slate-200 font-medium"> "Interested in more projects" <span class="text-accent"> "?" </span> </div>
-            <div class="h-2" />
+            <div class="h-2 flex-shrink-0" />
             <A attr:aria-label={MenuPage::Projects.aria_label()} href={MenuPage::Projects.path()} {..view! {< {..} class="self-start p-2 px-4 transition-colors bg-accent hover:bg-accent-dark rounded-md text-black font-medium" />}}> "View All Projects" </A>
 
         </div>
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
 
         <MyStory />
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
 
         <Footer />
     }

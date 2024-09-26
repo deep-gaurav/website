@@ -20,9 +20,9 @@ pub fn ContactPage() -> impl IntoView {
                         "Get In Touch"
                         <span class="text-accent"> "." </span>
                     </h1>
-                    <div class="h-8" />
+                    <div class="h-8 flex-shrink-0" />
                     <h2 class="text-left text-xl text-slate-300" > "Looking to partner or work together?"<br/>"Reach out over my email and I'll get back to you in the next 48 hours." </h2>
-                    <div class="h-6" />
+                    <div class="h-6 flex-shrink-0" />
                     <A
 
                         attr:aria-label="Email me"
@@ -45,7 +45,7 @@ pub fn ContactPage() -> impl IntoView {
             </div>
         </div>
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
 
         <Footer />
     }

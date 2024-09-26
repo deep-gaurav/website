@@ -121,7 +121,7 @@ fn MobileMenu(children: Children) -> impl IntoView {
                     }
                 }).collect_view()
             }
-            <div class="h-8" />
+            <div class="h-8 flex-shrink-0" />
         </nav>
     }
 }

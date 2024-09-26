@@ -19,13 +19,13 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
 
         <div id="og-image" class="md:min-h-svh w-full flex flex-col px-8 md:px-20">
 
-            <div class="h-10 md:h-20" />
+            <div class="h-10 md:h-20 flex-shrink-0" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> {project.title.clone()} <span class="text-accent"> "." </span> </h1>
-            <div class="h-8" />
+            <div class="h-8 flex-shrink-0" />
             <h2 class="text-left text-xl text-slate-300" > {project.tagline} </h2>
-            <div class="h-20" />
+            <div class="h-20 flex-shrink-0" />
             <Picture src={project.cover_url} attr:class="rounded-lg w-full max-h-80 object-cover" alt=format!("{} cover image", project.title)  />
-            <div class="h-10" />
+            <div class="h-10 flex-shrink-0" />
         </div>
         <div class="w-full flex flex-col px-8 md:px-20">
             <div class="flex gap-8 relative flex-col md:flex-row">
@@ -146,10 +146,10 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
             {
                 if !project.screenshots.is_empty() {
                     Either::Left(view! {
-                        <div class="h-10" />
+                        <div class="h-10 flex-shrink-0" />
                         <h2 class="text-5xl md:text-5xl font-bold text-left"> "Screenshots" <span class="text-accent"> "." </span> </h2>
 
-                        <div class="h-4" />
+                        <div class="h-6 flex-shrink-0" />
                         <div class="flex gap-4 h-80 overflow-auto">
                             {
                                 project.screenshots.into_iter().enumerate().map(|(i,sc_url)|view! {
@@ -179,10 +179,10 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                         let project_pairs = Pairs::new(vec![prev,next].into_iter());
                         Either::Left(
                             view! {
-                                <div class="h-20" />
+                                <div class="h-20 flex-shrink-0" />
                                 <h2 class="text-5xl md:text-5xl font-bold text-left"> "More Projects" <span class="text-accent"> "." </span> </h2>
 
-                                <div class="h-4" />
+                                <div class="h-6 flex-shrink-0" />
                                 <ProjectList project_pairs is_staggered=false
                                     is_first_lazy=true
                                     is_rest_lazy=true
@@ -198,10 +198,10 @@ pub fn ProjectView(project: ProjectData, projects: Vec<ProjectData>) -> impl Int
                 }
 
             }
-            <div class="h-8" />
+            <div class="h-8 flex-shrink-0" />
         </div>
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
         <Footer />
     }
 }

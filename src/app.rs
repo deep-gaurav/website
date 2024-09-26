@@ -10,6 +10,7 @@ use leptos_router::{
 use crate::{
     about::AboutPage,
     contact::ContactPage,
+    error_404::NotFound,
     home::HomePage,
     project::ProjectsPage,
     projects::{list_project_slugs, ProjectPage},
@@ -70,7 +71,7 @@ pub fn App() -> impl IntoView {
 
         // content for this welcome page
         <Router>
-            <main class="w-full h-full bg-black/90 text-white overflow-auto">
+            <main class="w-full h-full bg-black/90 text-white overflow-auto flex flex-col">
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage
                         ssr=SsrMode::Static(
@@ -105,6 +106,14 @@ pub fn App() -> impl IntoView {
                                         .into_iter()
                                         .collect()
                                 }),
+                        )
+                    />
+
+                    <Route
+                        path=path!("404")
+                        view=NotFound
+                        ssr=SsrMode::Static(
+                            StaticRoute::new(),
                         )
                     />
                 </Routes>

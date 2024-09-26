@@ -1,6 +1,7 @@
 pub mod about;
 pub mod app;
 pub mod contact;
+pub mod error_404;
 pub mod footer;
 pub mod header;
 pub mod home;

@@ -23,13 +23,13 @@ pub fn ProjectCard(project: ProjectData, #[prop(optional)] lazy: bool) -> impl I
                     }
                 }
             />
-            <div class="h-4" />
+            <div class="h-4 flex-shrink-0" />
             <div class="flex">
                 <h3 class="text-left text-3xl font-semibold"> {project.title.clone()} </h3>
                 <div class="flex-grow" />
                 <Icon icon=crate::icons::Icons::Open />
             </div>
-            <div class="h-2" />
+            <div class="h-2 flex-shrink-0" />
             <p class="text-left text-slate-300 text-lg"> {project.tagline} </p>
         </a>
     }
@@ -48,14 +48,14 @@ pub fn ProjectsPage() -> impl IntoView {
 
         <div id="og-image" class=" w-full flex flex-col px-8 md:px-20">
 
-            <div class="h-10 md:h-20" />
+            <div class="h-10 md:h-20 flex-shrink-0" />
             <h1 class="text-5xl md:text-7xl font-bold text-left"> "My "<span class="text-accent">"Digital"</span>" Creations" </h1>
-            <div class="h-8" />
+            <div class="h-8 flex-shrink-0" />
             <h2 class="text-left text-xl text-slate-300" > "From social apps to cloud solutions: a showcase of innovative projects solving real-world problems" </h2>
 
         </div>
         <div class="w-full flex flex-col px-8 md:px-20">
-            <div class="h-10" />
+            <div class="h-10 flex-shrink-0" />
             <div class="flex flex-col gap-10">
                 {
                     Suspend::new(
@@ -76,7 +76,7 @@ pub fn ProjectsPage() -> impl IntoView {
             </div>
         </div>
 
-        <div class="h-20" />
+        <div class="h-20 flex-shrink-0" />
         <Footer />
     }
 }

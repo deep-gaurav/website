@@ -34,7 +34,7 @@ pub fn Footer() -> impl IntoView {
                     <A attr:aria-label="My LinkedIn" href="https://www.linkedin.com/in/deepgauravraj/"> <Icon {..view! { <{..} class="hover:text-accent" />}}  icon=crate::icons::Icons::LinkedIn /> </A>
                 </div>
             </div>
-            <div class="h-10" />
+            <div class="h-10 flex-shrink-0" />
             <div class="flex flex-col md:flex-row items-center gap-4">
                 <div class="flex flex-col gap-4" >
                     <div class="text-xl font-semibold"> "Interested in working together" <span class="text-accent"> "?" </span> </div>
@@ -50,6 +50,6 @@ pub fn Footer() -> impl IntoView {
                 </div>
             </div>
         </footer>
-        <div class="h-12" />
+        <div class="h-12 flex-shrink-0" />
     }
 }
