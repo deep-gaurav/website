@@ -4,7 +4,6 @@ cover: "/assets/images/projects/bingotingo/cover.png"
 tagline: "Multiplayer Bingo and Lines & Boxes with Real-Time Chat"
 short_description: "BingoTingo is a Flutter web app that brings the classic games of Bingo and Lines & Boxes into the digital age. Create rooms, chat with friends, and enjoy multiplayer gaming experiences with real-time updates."
 stack: Flutter Web, Rust, GraphQL, WebSocket
-web_url: https://bingotingo.app/
 frontend_source: https://github.com/deep-gaurav/bingo
 backend_source: https://github.com/deep-gaurav/bingo-backend
 screenshots:
