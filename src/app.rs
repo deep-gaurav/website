@@ -28,7 +28,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 {
                     leptos::tachys::html::element::link()
                         .rel("preload")
-                        .href("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap")
+                        .href("/assets/fonts/Montserrat/font.css")
                         .r#as("style")
                         .onload("this.onload=null;this.rel='stylesheet'")
                 }
